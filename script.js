@@ -1,3 +1,5 @@
+import { buscador_gasolineras } from "/gasolineras.js";
+
 //Inicializar el mapa
 var map = L.map('map').setView([28.09973, -15.41343], 10);
 
@@ -82,15 +84,16 @@ fetch(origen_url)
                             
                         }
                         
-                        for (let i=0; i<coords.length;i+=4){
-                            fetch("https://api.geoapify.com/v2/places?categories=service.vehicle.fuel&filter=circle:"+String(coords[i][1])+","+String(coords[i][0])+",5000&bias=proximity:"+String(coords[i][1])+","+String(coords[i][0])+"&limit=20&apiKey=5defe68cc4dc4bffb53b9cc477f721f5")
-                            .then(result => result.json())
-                            .then(featureCollection =>{
-                                console.log(featureCollection)
-                            })
-                            .catch(error => console.log('error', error));
-                        }                     
+                        buscador_gasolineras(1000,coords).then(function (result) {
+                            result.forEach(element => {
+                                let coordGasolinera = element.split(",");
+                                console.log(coordGasolinera);
+                                markers.push(L.marker([parseFloat(coordGasolinera[1]),parseFloat(coordGasolinera[0])]).addTo(map));
+                            });
+                        })
                         
+                              
+
                     })
                     .catch(function(error){
                         console.log(error);
