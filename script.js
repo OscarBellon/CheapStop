@@ -1,4 +1,6 @@
+import { buscadorInformacionGasolinera } from "./gasolineras.js";
 import { buscador_gasolineras } from "/gasolineras.js";
+import { presentadorGasolineras } from "/gasolineras.js";
 
 //Inicializar el mapa
 var map = L.map('map').setView([28.09973, -15.41343], 10);
@@ -84,13 +86,17 @@ fetch(origen_url)
                             
                         }
                         
-                        buscador_gasolineras(1000,coords).then(function (result) {
-                            result.forEach(element => {
+                        buscador_gasolineras(500,coords).then(function (result) {
+                            /*result.forEach(element => {
                                 let coordGasolinera = element.split(",");
                                 console.log(coordGasolinera);
                                 markers.push(L.marker([parseFloat(coordGasolinera[1]),parseFloat(coordGasolinera[0])]).addTo(map));
-                            });
+                            });*/
+                            presentadorGasolineras(markers,result,map);
+                            buscadorInformacionGasolinera(result);
                         })
+
+                        
                         
                               
 
