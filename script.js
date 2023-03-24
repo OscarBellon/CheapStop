@@ -1,6 +1,8 @@
 import { buscadorInformacionGasolinera } from "./gasolineras.js";
 import { buscador_gasolineras } from "/gasolineras.js";
 import { presentadorGasolineras } from "/gasolineras.js";
+import { mostrarGasolinerasEnRadio } from "/gasolineras.js";
+
 
 //Inicializar el mapa
 var map = L.map('map').setView([28.09973, -15.41343], 10);
@@ -116,4 +118,60 @@ fetch(origen_url)
         console.log(error);
     });
 
+});
+
+//Variables necesarias para mostrar las gasolineras dentro de un ratio
+var circle = null;
+var marks = L.layerGroup().addTo(map);
+
+//Mostrar gasolineras en ratio
+document.getElementById("radius_btn").addEventListener("click", function (e) {
+  e.preventDefault(); //Prevenir el envio del formulario
+
+  var ubicacion = document.getElementById("ubicacion").value;
+  var Inputradius = document.getElementById("radius").value;
+
+  //Obtener las coordenadas de la ubicación utilizando la API de OpenStreetMap
+  var ubicacion_url =
+    "https://nominatim.openstreetmap.org/search.php?q=" +
+    ubicacion +
+    "&format=jsonv2";
+  fetch(ubicacion_url)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+      var ubicacionCoords = [parseFloat(data[0].lat), parseFloat(data[0].lon)]; //Coordenadas de la ubicación
+
+      console.log(ubicacionCoords);
+
+      //ELiminar marcadores
+      marks.clearLayers();
+
+      // Actualizar el círculo en el mapa
+      if (circle) {
+        map.removeLayer(circle);
+      }
+      circle = L.circle(ubicacionCoords, {
+        radius: Inputradius, // radio en metros
+        color: "blue", // color del borde
+        fillColor: "#3388ff", // color de relleno
+        fillOpacity: 0.2, // opacidad del relleno
+      }).addTo(map);
+
+      // Llamar a la función para obtener las gasolineras dentro del radio y agregar cada marcador a la capa
+      mostrarGasolinerasEnRadio(Inputradius, ubicacionCoords).then(function (gasolineras) {
+        for (let i = 0; i < gasolineras.length; i++) {
+          const gasolinera = gasolineras[i];
+          console.log(gasolinera)
+          marks.addLayer(
+            L.marker([
+              parseFloat((gasolinera.latlng[1])),
+              parseFloat((gasolinera.latlng[0])),
+            ]).addTo(map)
+          );
+        }
+      });
+    });
 });

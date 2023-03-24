@@ -21,6 +21,7 @@ export async function buscador_gasolineras(radio, coords) {
     })
 }
 
+ 
 export function presentadorGasolineras(markers,gasolineras,map) {
     var iconGas = new L.icon({
         iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-orange.png',
@@ -62,3 +63,26 @@ export function buscadorInformacionGasolinera(gasolineras){
     
 
 }
+
+export async function mostrarGasolinerasEnRadio(radio, ubicacionCoords) {
+    // Obtener las gasolineras cercanas utilizando la API de geoapify
+    const response = await fetch(`https://api.geoapify.com/v2/places?categories=service.vehicle.fuel&filter=circle:${ubicacionCoords[1]},${ubicacionCoords[0]},${radio}&limit=20&apiKey=5defe68cc4dc4bffb53b9cc477f721f5`);
+    const data = await response.json();
+  
+    // Crear un array de objetos con las coordenadas y la información relevante de cada gasolinera
+    const gasolinerasEnRadio = [];
+    data.features.forEach(function(gasolinera) {
+      const gasolineraCoords = gasolinera.geometry.coordinates;
+      const distancia = L.latLng(ubicacionCoords).distanceTo(gasolineraCoords.reverse());
+      if (distancia <= radio) {
+        gasolinerasEnRadio.push({
+          latlng: gasolineraCoords.reverse(),
+          name: gasolinera.properties.name,
+          address: gasolinera.properties.formatted_address
+        });
+      }
+    });
+    
+    // Devolver el array de objetos con las coordenadas y la información relevante de cada gasolinera
+    return gasolinerasEnRadio;
+  }
