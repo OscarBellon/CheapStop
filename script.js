@@ -217,3 +217,32 @@ document.getElementById("ruta").addEventListener("click", function (e){
   }
   marks.clearLayers();
 });
+
+document.getElementById("icono-menu").addEventListener("click", function () {
+  document.getElementById("botones-container").style.display = "none";
+  var dropdownMenu = document.getElementById("menu-desplegable");
+  if (dropdownMenu.style.display === "none") {
+    dropdownMenu.style.display = "block";
+  } else {
+    dropdownMenu.style.display = "none";
+  }
+});
+
+
+document.body.addEventListener('mouseup', () => {
+  
+  document.getElementById("botones-container").addEventListener("click", () => {
+    console.log("1");
+  });
+  
+}); 
+
+ 
+
+document.getElementById("combustible").addEventListener("click", () => {
+  document.getElementById("botones-container").style.display = "flex";
+  document.getElementById("menu-desplegable").style.display="none";
+});
+
+
+
