@@ -1,0 +1,49 @@
+.tarjeta{
+    background-color: #FD9950;
+    border-color: black;
+    border-width: 3px;
+    border-style: solid;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.linea{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.precio{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.coste{
+    padding-left: 30px;
+    font-family: arial;
+    font-weight: bolder;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.titulo{
+    padding-left: 20px;
+    font-family: arial;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.nombre{
+    padding-left: 20px;
+    font-family: arial;
+    font-weight: bolder;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.icono{
+    margin-right: 20px
+}
