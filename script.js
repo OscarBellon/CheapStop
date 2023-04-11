@@ -220,6 +220,7 @@ document.getElementById("ruta").addEventListener("click", function (e){
 
 document.getElementById("icono-menu").addEventListener("click", function () {
   document.getElementById("botones-container").style.display = "none";
+  document.getElementById("slider-container").style.display = "none";
   var dropdownMenu = document.getElementById("menu-desplegable");
   if (dropdownMenu.style.display === "none") {
     dropdownMenu.style.display = "block";
@@ -241,6 +242,11 @@ document.body.addEventListener('mouseup', () => {
 
 document.getElementById("combustible").addEventListener("click", () => {
   document.getElementById("botones-container").style.display = "flex";
+  document.getElementById("menu-desplegable").style.display="none";
+});
+
+document.getElementById("radio").addEventListener("click", () => {
+  document.getElementById("slider-container").style.display = "flex";
   document.getElementById("menu-desplegable").style.display="none";
 });
 

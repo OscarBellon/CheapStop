@@ -148,8 +148,9 @@ input{
   background-color: #E6F3FF;
   border: 1px solid #ccc;
   border-radius: 5px;
+  position: absolute;
+  margin-left: 20px;
   padding: 10px;
-  top: 100%;
   z-index: 2;
 }
 
@@ -195,6 +196,25 @@ button.botonCombustible:hover{
   background-color: #093E8B;
 }
 
+#rangevalue{
+  align-self: center;
+}
+.slider-container{
+  justify-content: center;
+  background: #f2f2f2;
+  border-radius: 30px;
+  margin-top: 30px;
+}
+.form-range{
+  width:50%;
+}
+
+
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+
+
+}
 
 @media (min-width: 800px) {
   .botones-container {
