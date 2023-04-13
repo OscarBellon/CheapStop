@@ -200,10 +200,12 @@ button.botonCombustible:hover{
   align-self: center;
 }
 .slider-container{
+  margin-left: 5px;
+  margin-right: 5px;
   justify-content: center;
   background: #f2f2f2;
   border-radius: 30px;
-  margin-top: 30px;
+  margin-top: 15px;
 }
 .form-range{
   width:50%;
