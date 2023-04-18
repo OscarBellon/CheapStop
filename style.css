@@ -29,12 +29,23 @@ body{
 }
 
 .titulo{
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: arial;
   font-weight: bolder;
+  font-size: 28px;
+  margin: 10px;
+  height: 30px;
+  display: flex;
+  align-items: center;
 }
 
 .acceder{
   padding-right: 20px;
+  padding-top: 5px;
+}
+
+.person-circle{
+  width: 100%;
+  size: 100%;
 }
 
 .barra{
@@ -76,6 +87,7 @@ body{
   padding: 10px;
   padding-top: 3px;
   padding-bottom: 3px;
+  font-size: 15px;
 }
 
 #map {
@@ -147,6 +159,7 @@ input{
   border: 0;
   outline-width: 0;
   width: 100%;
+  font-size: 16px;
 }
 
 .menu-desplegable {
