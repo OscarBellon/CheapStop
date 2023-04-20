@@ -125,12 +125,21 @@ body{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
+}
+
+.inputRuta{
+  margin: 7px;
+  padding: 7px;
+  padding-left: 10px;
+  margin-left: 0;
 }
 
 .destino{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 }
 
 .bi-geo-fill{
