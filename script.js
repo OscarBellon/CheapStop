@@ -1,10 +1,10 @@
 import { buscadorInformacionGasolinera } from "./gasolineras.js";
 import { buscador_gasolineras } from "./gasolineras.js";
 import { presentadorGasolineras } from "./gasolineras.js";
-import { mostrarGasolinerasEnRadio } from "./gasolineras.js";
+import { mostrarRatio } from "./radio.js";
 import {busquedaOrigenDestino} from "./rutas.js";
 import { busacdorRuta } from "./rutas.js";
-import { mostrarRatio } from "./radio.js";
+
 //Icono para gasolineras
 var iconGas = new L.icon({
   iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-orange.png',
@@ -58,6 +58,8 @@ document
 
     }
   });
+  
+
 
 mostrarRatio(map, markers, iconGas);
 
