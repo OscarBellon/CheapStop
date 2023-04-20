@@ -58,6 +58,8 @@ document
 
     }
   });
+  
+
 
 //Variables necesarias para mostrar las gasolineras dentro de un ratio
 var circle = null;
