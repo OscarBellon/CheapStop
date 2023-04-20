@@ -1,7 +1,12 @@
 body{
   background-color: #f2f2f2;
+  height: 100%;
+  width: 100%;
 	margin: 0;
 	padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
 }
 
 .encabezado{
@@ -24,12 +29,23 @@ body{
 }
 
 .titulo{
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: arial;
   font-weight: bolder;
+  font-size: 28px;
+  margin: 10px;
+  height: 30px;
+  display: flex;
+  align-items: center;
 }
 
 .acceder{
   padding-right: 20px;
+  padding-top: 5px;
+}
+
+.person-circle{
+  width: 100%;
+  size: 100%;
 }
 
 .barra{
@@ -71,6 +87,7 @@ body{
   padding: 10px;
   padding-top: 3px;
   padding-bottom: 3px;
+  font-size: 15px;
 }
 
 #map {
@@ -142,14 +159,16 @@ input{
   border: 0;
   outline-width: 0;
   width: 100%;
+  font-size: 16px;
 }
 
 .menu-desplegable {
   background-color: #E6F3FF;
   border: 1px solid #ccc;
   border-radius: 5px;
+  position: absolute;
+  margin-left: 20px;
   padding: 10px;
-  top: 100%;
   z-index: 2;
 }
 
@@ -195,6 +214,51 @@ button.botonCombustible:hover{
   background-color: #093E8B;
 }
 
+#rangevalue{
+  align-self: center;
+}
+.slider-container{
+  margin-left: 5px;
+  margin-right: 5px;
+  justify-content: center;
+  background: #f2f2f2;
+  border-radius: 30px;
+  margin-top: 15px;
+}
+.form-range{
+  width:50%;
+}
+
+.inferior{
+  display: flex;
+  align-content: flex-end;
+  justify-content: flex-end;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.bandera{
+  padding: 0;
+  margin: 20px;
+  margin-bottom: 35px;
+  border: 0;
+  width: 40px;
+  height: 20px;
+  font-size: 35px;
+  background-color: transparent;
+}
+
+.interfaz{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+
+
+}
 
 @media (min-width: 800px) {
   .botones-container {
