@@ -2,7 +2,8 @@ export async function buscador_gasolineras(radio, coords) {
     
     let setGasolineras = new Set()
     var fetches=[];
-    
+    radio = radio*1000;
+    console.log("Valo ratio en buscador_gasolineras: " + radio);
     for (let i=0; i<coords.length;i++){
         //Seleccionamos la URL en funcion de si se define para una ruta o para una única ubicación
         var fetchUrl = coords.length > 2 ? "https://api.geoapify.com/v2/places?categories=service.vehicle.fuel&filter=circle:"+String(coords[i][1])+","+String(coords[i][0])+","+String(radio)+"&bias=proximity:"+String(coords[i][1])+","+String(coords[i][0])+"&limit=20&apiKey=5defe68cc4dc4bffb53b9cc477f721f5" 
