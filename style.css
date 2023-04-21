@@ -176,9 +176,12 @@ input{
   border: 1px solid #ccc;
   border-radius: 5px;
   position: absolute;
-  margin-left: 20px;
-  padding: 10px;
   z-index: 2;
+  top: 50px;
+  width: 190px;
+  height: 120px;
+  padding: 10px;
+  transition: transform 0.3s ease-in-out;
 }
 
 .menu-desplegable ul {
