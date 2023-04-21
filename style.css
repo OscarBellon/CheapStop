@@ -190,6 +190,16 @@ input{
 .menu-desplegable li {
   cursor: pointer;
   padding: 5px 10px;
+  font-family: arial;
+  font-size: 20px;
+  font-weight: 500;
+  margin: 3px;
+  display: flex;
+  align-items: center;
+}
+
+.menu-desplegable span{
+  margin-left: 10px;
 }
 
 .menu-desplegable li:hover {
@@ -202,7 +212,8 @@ input{
   flex-flow: column wrap;
   width: 100%;
   height: 70px;
-  margin: 20px auto;
+  margin: auto;
+  padding-top: 10px;
 }
 
 .botonCombustible {
@@ -217,6 +228,8 @@ input{
   margin-right: 10px;
   cursor: pointer;
   border-radius: 8px;
+  padding: 10px;
+  border-radius: 100px;
 }
 
 button.botonCombustible:hover{
@@ -269,8 +282,18 @@ button.botonCombustible:hover{
 
 }
 
-@media (min-width: 800px) {
+@media (max-width: 800px) {
   .botones-container {
-    height: 10px;
+    display: flex;
+    flex-direction: row;
+    align-content: space-between;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin: auto
+  }
+
+  .botonCombustible{
+    width: 45.5%;
   }
 }
+

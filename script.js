@@ -142,7 +142,7 @@ document.getElementById("icono-menu").addEventListener("click", function () {
   document.getElementById("slider-container").style.display = "none";
   var dropdownMenu = document.getElementById("menu-desplegable");
   if (dropdownMenu.style.display === "none") {
-    dropdownMenu.style.display = "block";
+    dropdownMenu.style.display = "flex";
   } else {
     dropdownMenu.style.display = "none";
   }
