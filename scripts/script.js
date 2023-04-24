@@ -69,7 +69,7 @@ document
         busacdorRuta(result[0],result[1])
         .then(function (ruta){
             L.polyline(ruta,{color: 'blue'}).addTo(map);
-            buscador_gasolineras(500,ruta).then(function (result) {
+            buscador_gasolineras(ratioValue, ruta).then(function (result) {
               buscadorInformacionGasolinera(result).then(info =>{
                 console.log(info)
                 info.forEach(gasolinera =>{
