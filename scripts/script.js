@@ -1,9 +1,10 @@
-import { buscadorInformacionGasolinera } from "./gasolineras.js";
+import { buscadorInformacionGasolinera, pushMarcadorInformacion } from "./gasolineras.js";
 import { buscador_gasolineras } from "./gasolineras.js";
 import { presentadorGasolineras } from "./gasolineras.js";
 import { mostrarRatio } from "./radio.js";
 import {busquedaOrigenDestino} from "./rutas.js";
 import { busacdorRuta } from "./rutas.js";
+import { getListaGasolineras } from "./listas.js";
 
 //Icono para gasolineras
 var iconGas = new L.icon({
@@ -30,6 +31,12 @@ var gasLayer = L.layerGroup().addTo(map);
 
 //Lista de marcadores
 var markers = [];
+var listaGasolineras=[];
+
+document.getElementById("gasolineraLista").addEventListener("click",function () {
+  sortGasolineras(listaGasolineras)
+})
+
 //Envio del formulario de busqueda de gasolineras
 document
   .getElementById("destination")
@@ -51,7 +58,15 @@ document
         .then(function (ruta){
             L.polyline(ruta,{color: 'blue'}).addTo(map);
             buscador_gasolineras(500,ruta).then(function (result) {
-                presentadorGasolineras(markers, result,map,iconGas);
+              buscadorInformacionGasolinera(result).then(info =>{
+                console.log(info)
+                info.forEach(gasolinera =>{
+                  //console.log(gasolinera);
+                  
+                  pushMarcadorInformacion(markers,gasolinera,map,iconGas,listaGasolineras);
+                })
+              })
+              //presentadorGasolineras(markers, result,map,iconGas);
             })
         })
       })
