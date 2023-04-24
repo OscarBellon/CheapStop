@@ -4,7 +4,7 @@ import { presentadorGasolineras } from "./gasolineras.js";
 import { mostrarRatio } from "./radio.js";
 import { busquedaOrigenDestino } from "./rutas.js";
 import { busacdorRuta } from "./rutas.js";
-import { getListaGasolineras } from "./listas.js";
+import { sortGasolineras } from "./listas.js";
 
 //Icono para gasolineras
 var iconGas = new L.icon({
