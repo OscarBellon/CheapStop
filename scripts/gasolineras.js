@@ -64,7 +64,7 @@ export function presentadorGasolineras(markers,gasolineras,map, iconGas) {
 }
 
 export function pushMarcadorInformacion(markers,infoGasolinera,map,iconGas,listaGasolineras) {
-    fetch("/Componentes\\gasolinera/gasolinera.html").then(html => {
+    fetch("/Componentes/Gasolinera/gasolinera.html").then(html => {
        return html.text()
     })
     .then(content=>{
