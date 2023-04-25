@@ -5,6 +5,7 @@ import { mostrarRatio, mostrarRatioActualizado } from "./radio.js";
 import {busquedaOrigenDestino} from "./rutas.js";
 import { busacdorRuta } from "./rutas.js";
 import { pushMarcadorInformacion } from "./gasolineras.js";
+import { sortGasolineras } from "./listas.js";
 
 //Icono para gasolineras
 var iconGas = new L.icon({
@@ -36,6 +37,10 @@ var gasLayer = L.layerGroup().addTo(map);
 //Lista de marcadores
 var markers = [];
 var listaGasolineras=[];
+
+document.getElementById("gasolineraLista").addEventListener("click",function () {
+  sortGasolineras(listaGasolineras)
+})
 //Envio del formulario de busqueda de gasolineras
 document
   .getElementById("destination")
