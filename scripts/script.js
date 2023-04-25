@@ -4,6 +4,7 @@ import { presentadorGasolineras } from "./gasolineras.js";
 import { mostrarRatio, mostrarRatioActualizado } from "./radio.js";
 import {busquedaOrigenDestino} from "./rutas.js";
 import { busacdorRuta } from "./rutas.js";
+import { pushMarcadorInformacion } from "./gasolineras.js";
 
 //Icono para gasolineras
 var iconGas = new L.icon({
@@ -78,7 +79,7 @@ function rutaActualizada(radio){
     .then(function (ruta){
       var rutaGasofa = L.polyline(ruta,{color: 'blue'}).addTo(map);
       buscador_gasolineras(radio,ruta).then(function (result) {
-        presentadorGasolineras(markers, result,map,iconGas);
+        pushMarcadorInformacion(markers,gasolinera,map,iconGas,listaGasolineras);
       })
       //El mapa se ajusta a la ruta
       map.flyToBounds(rutaGasofa.getBounds(), {duration: 1});

@@ -1,8 +1,36 @@
+let combustible = [
+    "Precio Gasolina 95 E5",
+    "Precio Gasolina 98 E5",
+    "Precio Gasoleo A",
+    "Precio Gasoleo Premium"
+]
+let combustibleIndice = 0;
+
+document.getElementById("diesel").addEventListener("click", function () {
+    combustibleIndice=2;
+    console.log("diesel")
+});
+document.getElementById("gasolina95").addEventListener("click", function () {
+    combustibleIndice=0;
+    console.log("95")
+});
+document.getElementById("dieselplus").addEventListener("click", function () {
+    combustibleIndice=3;
+    console.log("pl")
+});
+document.getElementById("gasolina98").addEventListener("click", function () {
+    combustibleIndice=1;
+    console.log("98")
+});
+
+
+
 export async function buscador_gasolineras(radio, coords) {
     
     let setGasolineras = new Set()
     var fetches=[];
-    
+    radio = radio*1000;
+    console.log("Valo ratio en buscador_gasolineras: " + radio);
     for (let i=0; i<coords.length;i++){
         //Seleccionamos la URL en funcion de si se define para una ruta o para una única ubicación
         var fetchUrl = coords.length > 2 ? "https://api.geoapify.com/v2/places?categories=service.vehicle.fuel&filter=circle:"+String(coords[i][1])+","+String(coords[i][0])+","+String(radio)+"&bias=proximity:"+String(coords[i][1])+","+String(coords[i][0])+"&limit=20&apiKey=5defe68cc4dc4bffb53b9cc477f721f5" 
@@ -69,11 +97,12 @@ export function  buscadorInformacionGasolinera(gasolineras){
                 var valorRedondeado= parseFloat(coordGasolinera[i]).toFixed(3);
                 coordGasolinera[i] = valorRedondeado;
             }
+           
             coleccionInformacionGasolineras.push(res.ListaEESSPrecio
-                    .filter(gasolinera=> parseFloat(gasolinera.Latitud.replace(",",".")).toFixed(3)==coordGasolinera[1] &&  parseFloat(gasolinera["Longitud (WGS84)"].replace(",",".")).toFixed(3)==coordGasolinera[0]));
+                    .filter(gasolinera=> parseFloat(gasolinera.Latitud.replace(",",".")).toFixed(3)==coordGasolinera[1]
+                     &&  parseFloat(gasolinera["Longitud (WGS84)"].replace(",",".")).toFixed(3)==coordGasolinera[0])[0]);
         });
-
-        console.log(coleccionInformacionGasolineras);
+        coleccionInformacionGasolineras=coleccionInformacionGasolineras.filter(item=>item);
         return coleccionInformacionGasolineras;
         //console.log(res.ListaEESSPrecio
         //    .filter(gasolinera=> gasolinera.Latitud==latitud || gasolinera["Longitud (WGS84)"]==longitud));
