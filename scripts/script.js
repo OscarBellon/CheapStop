@@ -35,6 +35,7 @@ var gasLayer = L.layerGroup().addTo(map);
 
 //Lista de marcadores
 var markers = [];
+var listaGasolineras=[];
 //Envio del formulario de busqueda de gasolineras
 document
   .getElementById("destination")
@@ -79,7 +80,15 @@ function rutaActualizada(radio){
     .then(function (ruta){
       var rutaGasofa = L.polyline(ruta,{color: 'blue'}).addTo(map);
       buscador_gasolineras(radio,ruta).then(function (result) {
-        pushMarcadorInformacion(markers,gasolinera,map,iconGas,listaGasolineras);
+
+        buscadorInformacionGasolinera(result).then(info =>{
+            console.log(info)
+            listaGasolineras=[];
+            info.forEach(gasolinera =>{
+            console.log(gasolinera);                  
+            pushMarcadorInformacion(markers,gasolinera,map,iconGas,listaGasolineras);
+          })
+        })
       })
       //El mapa se ajusta a la ruta
       map.flyToBounds(rutaGasofa.getBounds(), {duration: 1});
