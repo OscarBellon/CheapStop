@@ -265,3 +265,32 @@ button.botonCombustible:hover{
     height: 10px;
   }
 }
+
+
+#usuario-desplegable {
+  background-color: #0B4EAE;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  position: absolute;
+ 
+  margin-right: 20px;
+  padding: 10px;
+  z-index: 2;
+}
+
+#usuario-desplegable ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#usuario-desplegable li {
+  cursor: pointer;
+  padding: 5px 10px;
+  background-color: #FFCF00;
+  margin-bottom: 10px;
+}
+
+#usuario-desplegable li:hover {
+  background-color: #f0f0f0;
+}
