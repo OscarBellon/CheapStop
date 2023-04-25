@@ -74,6 +74,7 @@ export function pushMarcadorInformacion(markers,infoGasolinera,map,iconGas,lista
         let doc = parser.parseFromString(content, 'text/html');
         doc.getElementById("gasNombre").textContent = infoGasolinera["Rótulo"];
         doc.getElementById("precioGasolina").textContent = infoGasolinera[combustible[combustibleIndice]] + " €";
+        doc.getElementById("maps").href=ParsearUbcicacion(infoGasolinera["Dirección"],infoGasolinera["C.P."]);
         let cont= doc.querySelector("html").innerHTML
         let gasolinera={gasNombre: infoGasolinera["Rótulo"],gasPrecio:infoGasolinera[combustible[combustibleIndice]],html: cont}
         marcador.bindPopup(cont,{minWidth: 500}).openPopup();
@@ -105,8 +106,13 @@ export function  buscadorInformacionGasolinera(gasolineras){
         return coleccionInformacionGasolineras;
         //console.log(res.ListaEESSPrecio
         //    .filter(gasolinera=> gasolinera.Latitud==latitud || gasolinera["Longitud (WGS84)"]==longitud));
-    })
-        
-    
+    })  
+}
 
+function ParsearUbcicacion(calle, codigo) {
+    const url = "https://www.google.es/maps/place/";
+    const calleParseada = calle.replace(/\s+/g, "+");
+    var resultado = url.concat(calleParseada)
+    resultado = resultado.concat(",+");
+    return resultado.concat(codigo);
 }
