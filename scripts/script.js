@@ -98,37 +98,20 @@ function rutaActualizada(radio){
     .then(function (ruta){
       var rutaGasofa = L.polyline(ruta,{color: 'blue'}).addTo(map);
       buscador_gasolineras(radio,ruta).then(function (result) {
-        presentadorGasolineras(markers, result,map,iconGas);
-      })
-      //El mapa se ajusta a la ruta
-      map.flyToBounds(rutaGasofa.getBounds(), {duration: 1});
+        buscadorInformacionGasolinera(result).then(info =>{
+          console.log(info)
+          listaGasolineras=[];
+          info.forEach(gasolinera =>{
+          console.log(gasolinera);                  
+          pushMarcadorInformacion(markers,gasolinera,map,iconGas,listaGasolineras);
+        })
       })
     })
+    //El mapa se ajusta a la ruta
+    map.flyToBounds(rutaGasofa.getBounds(), {duration: 1});
+    })
+  })
 }
-
-//Eliminar marcadores al cambiar de pagina
-document.getElementById("volver").addEventListener("click", function (e){
-  /*for (let j = 0; j < markers.length; j++) {
-    map.removeLayer(markers[j]);
-  };
-  map.eachLayer((layer) => {
-    if (layer !== baseLayer) {
-      map.removeLayer(layer);
-    }
-  });*/
-  console.log("LoL xd");
-  //borrarMierdaDelMapa(markers,baseLayer);
-});
-
-document.getElementById("ruta").addEventListener("click", function (e){
-  /*map.eachLayer((layer) => {
-    if (layer !== baseLayer) {
-      map.removeLayer(layer);
-    }
-  });
-  console.log("Pene");*/
-  //borrarMierdaDelMapa(markers,baseLayer);
-});
 
 document.getElementById("icono-menu").addEventListener("click", function () {
   document.getElementById("botones-container").style.display = "none";
