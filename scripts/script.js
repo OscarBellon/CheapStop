@@ -4,8 +4,6 @@ import { presentadorGasolineras } from "./gasolineras.js";
 import { mostrarRatio, mostrarRatioActualizado } from "./radio.js";
 import {busquedaOrigenDestino} from "./rutas.js";
 import { busacdorRuta } from "./rutas.js";
-import { pushMarcadorInformacion } from "./gasolineras.js";
-import { sortGasolineras } from "./listas.js";
 
 //Icono para gasolineras
 var iconGas = new L.icon({
@@ -36,11 +34,6 @@ var gasLayer = L.layerGroup().addTo(map);
 
 //Lista de marcadores
 var markers = [];
-var listaGasolineras=[];
-
-document.getElementById("gasolineraLista").addEventListener("click",function () {
-  sortGasolineras(listaGasolineras)
-})
 //Envio del formulario de busqueda de gasolineras
 document
   .getElementById("destination")
@@ -65,14 +58,14 @@ export function borrarMierdaDelMapa(marcadores, layerBase){
 
 }
 
-mostrarRatio(map, markers, iconGas);
+mostrarRatio(map, markers, iconGas, radio);
 
 function rutaActualizada(radio){
     var origin = document.getElementById("origin").value;
     var destination = document.getElementById("destination").value;
 
     if(radio===null){
-      radio=500;
+      radio=2800;
     }
 
     borrarMierdaDelMapa(markers,baseLayer);
@@ -85,15 +78,7 @@ function rutaActualizada(radio){
     .then(function (ruta){
       var rutaGasofa = L.polyline(ruta,{color: 'blue'}).addTo(map);
       buscador_gasolineras(radio,ruta).then(function (result) {
-
-        buscadorInformacionGasolinera(result).then(info =>{
-            console.log(info)
-            listaGasolineras=[];
-            info.forEach(gasolinera =>{
-            console.log(gasolinera);                  
-            pushMarcadorInformacion(markers,gasolinera,map,iconGas,listaGasolineras);
-          })
-        })
+        presentadorGasolineras(markers, result,map,iconGas);
       })
       //El mapa se ajusta a la ruta
       map.flyToBounds(rutaGasofa.getBounds(), {duration: 1});
@@ -169,4 +154,13 @@ document.getElementById('customRange3').addEventListener('change', function() {
 });
 
 
-
+document.getElementById("icono-usuario").addEventListener("click", function () {
+  //document.getElementById("botones-container").style.display = "none";
+  //document.getElementById("slider-container").style.display = "none";
+  var dropdownMenu = document.getElementById("usuario-desplegable");
+  if (dropdownMenu.style.display === "none") {
+    dropdownMenu.style.display = "block";
+  } else {
+    dropdownMenu.style.display = "none";
+  }
+});

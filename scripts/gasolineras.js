@@ -29,7 +29,7 @@ export async function buscador_gasolineras(radio, coords) {
     
     let setGasolineras = new Set()
     var fetches=[];
-    radio = radio*1000;
+
     console.log("Valo ratio en buscador_gasolineras: " + radio);
     for (let i=0; i<coords.length;i++){
         //Seleccionamos la URL en funcion de si se define para una ruta o para una única ubicación
