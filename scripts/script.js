@@ -4,6 +4,10 @@ import { presentadorGasolineras } from "./gasolineras.js";
 import { mostrarRatio, mostrarRatioActualizado } from "./radio.js";
 import {busquedaOrigenDestino} from "./rutas.js";
 import { busacdorRuta } from "./rutas.js";
+import { pushMarcadorInformacion } from "./gasolineras.js";
+import { sortGasolineras } from "./listas.js";
+import { clearListaGasolineras } from "./listas.js";
+
 
 //Icono para gasolineras
 var iconGas = new L.icon({
@@ -34,6 +38,22 @@ var gasLayer = L.layerGroup().addTo(map);
 
 //Lista de marcadores
 var markers = [];
+var listaGasolineras=[];
+
+
+var switchListaGasolineras=false;
+document.getElementById("gasolineraLista").addEventListener("click",function () {
+  if(!switchListaGasolineras){
+    sortGasolineras(listaGasolineras);
+    switchListaGasolineras=true;
+  }
+  else{
+    clearListaGasolineras()
+    switchListaGasolineras=false;
+  }
+  
+})
+
 //Envio del formulario de busqueda de gasolineras
 document
   .getElementById("destination")
