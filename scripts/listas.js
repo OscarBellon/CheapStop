@@ -9,6 +9,9 @@ export function listarGasolineras(listaGasolineras){
         let node = document.createElement("div");
         node.innerHTML=gasolinera.html;
         document.getElementById("gas-list").appendChild(node) 
-    });
-    
+    });   
+}
+
+export function clearListaGasolineras(){
+    document.getElementById("gas-list").innerHTML=""
 }

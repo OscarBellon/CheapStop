@@ -29,7 +29,7 @@ export async function buscador_gasolineras(radio, coords) {
     
     let setGasolineras = new Set()
     var fetches=[];
-    radio = radio*1000;
+
     console.log("Valo ratio en buscador_gasolineras: " + radio);
     for (let i=0; i<coords.length;i++){
         //Seleccionamos la URL en funcion de si se define para una ruta o para una única ubicación
@@ -75,6 +75,7 @@ export function pushMarcadorInformacion(markers,infoGasolinera,map,iconGas,lista
         doc.getElementById("gasNombre").textContent = infoGasolinera["Rótulo"];
         doc.getElementById("precioGasolina").textContent = infoGasolinera[combustible[combustibleIndice]] + " €";
         doc.getElementById("maps").href=ParsearUbcicacion(infoGasolinera["Dirección"],infoGasolinera["C.P."]);
+        doc.getElementById("tipoGasolinaTexto").textContent=combustible[combustibleIndice];
         let cont= doc.querySelector("html").innerHTML
         let gasolinera={gasNombre: infoGasolinera["Rótulo"],gasPrecio:infoGasolinera[combustible[combustibleIndice]],html: cont}
         marcador.bindPopup(cont,{minWidth: 500}).openPopup();

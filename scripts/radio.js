@@ -2,12 +2,15 @@ import { buscador_gasolineras, buscadorInformacionGasolinera, presentadorGasolin
 import { baseLayer, borrarMierdaDelMapa } from "./script.js";
 
 
-export async function mostrarRatio(map, markers, iconGas) {
+export async function mostrarRatio(map, markers, iconGas, radio) {
   //Variables necesarias para mostrar las gasolineras dentro de un ratio
   var circle = null;
   var marks = L.layerGroup().addTo(map);
 
- 
+  if(radio===null){
+    radio=2800;
+  }
+  
   //Mostrar gasolineras en ratio
   document
     .getElementById("ubicacion")
@@ -57,7 +60,7 @@ export async function mostrarRatio(map, markers, iconGas) {
 
 
             circle = L.circle(ubicacionCoords, {
-              radius: 500, // radio en metros
+              radius: radio, // radio en metros
               color: "blue", // color del borde
               fillColor: "#3388ff", // color de relleno
               fillOpacity: 0.2, // opacidad del relleno
@@ -67,7 +70,7 @@ export async function mostrarRatio(map, markers, iconGas) {
             map.flyToBounds(circle.getBounds(), {duration: 1});
 
             // Llamar a la función para mostrar las gasolineras dentro del radio
-            buscador_gasolineras(500, ubicacionCoords).then(function (result) {
+            buscador_gasolineras(radio, ubicacionCoords).then(function (result) {
               console.log("Longitud: " + ubicacionCoords[0]);
               presentadorGasolineras(markers, result, map, iconGas);
               buscadorInformacionGasolinera(result);
