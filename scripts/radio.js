@@ -1,4 +1,4 @@
-import { buscador_gasolineras, buscadorInformacionGasolinera, presentadorGasolineras} from "./gasolineras.js";
+import { buscador_gasolineras, buscadorInformacionGasolinera, pushMarcadorInformacion} from "./gasolineras.js";
 import { baseLayer, borrarMierdaDelMapa } from "./script.js";
 
 
@@ -6,6 +6,7 @@ export async function mostrarRatio(map, markers, iconGas) {
   //Variables necesarias para mostrar las gasolineras dentro de un ratio
   var circle = null;
   var marks = L.layerGroup().addTo(map);
+  var listaGasolineras = [];
   console.log("Entro a mostrarRaio");
   var radio = Number(localStorage.getItem('radio'));
   
@@ -75,8 +76,14 @@ export async function mostrarRatio(map, markers, iconGas) {
             // Llamar a la función para mostrar las gasolineras dentro del radio
             buscador_gasolineras(radio, ubicacionCoords).then(function (result) {
               console.log("Longitud: " + ubicacionCoords[0]);
-              presentadorGasolineras(markers, result, map, iconGas);
-              buscadorInformacionGasolinera(result);
+              buscadorInformacionGasolinera(result).then((info) => {
+                console.log(info);
+                listaGasolineras = [];
+                info.forEach((gasolinera) => {
+                  console.log(gasolinera);
+                  pushMarcadorInformacion( markers, gasolinera, map, iconGas, listaGasolineras);
+                });
+              });
             });
           });
       }
