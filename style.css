@@ -1,0 +1,302 @@
+body{
+  background-color: #f2f2f2;
+  height: 100%;
+  width: 100%;
+	margin: 0;
+	padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+}
+
+.encabezado{
+  background-color: #FD8024;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.icono{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.menu{
+  padding-left: 20px;
+}
+
+.titulo{
+  font-family: arial;
+  font-weight: bolder;
+  font-size: 34px;
+  margin: 10px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.acceder{
+  padding-right: 20px;
+  padding-top: 5px;
+}
+
+.person-circle{
+  width: 100%;
+  size: 100%;
+}
+
+.barra{
+  margin-left: 5px;
+  margin-right: 5px;
+  background-color: #f2f2f2;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-radius: 30px;
+}
+
+.geo-icon{
+  padding-left: 7px;
+  padding-top: 2px;
+}
+
+.barraBusqueda{
+  background-color: f2f2f2;
+  display: flex;
+  justify-content: space-between;
+}
+
+.barra input{
+  background-color: #f2f2f2;
+  margin-left: 10px;
+  padding-left: 5px;
+  border-radius: 30px;
+  border: 0;
+  outline-width: 0;
+}
+
+.barra button{
+  background-color: #6d95ce;
+  border-radius: 50px;
+  border-color: #6d95ce;
+  margin-right: 1px;
+  margin: 5px;
+  padding: 10px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  font-size: 15px;
+}
+
+#map {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	z-index: -1; /*Aqui esta la superlinea de codigo. Solo sirve para elementos que tengan "position"*/
+}
+
+.leaflet-control-container{
+  display: none;
+}
+
+.leaflet-popup-content-wrapper {
+	background-color: #ffffff;
+	border-radius: 4px;
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.BarraRuta{
+  background-color: white;
+  display: none;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.inputs{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.origen{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.inputRuta{
+  margin: 7px;
+  padding: 7px;
+  padding-left: 10px;
+  margin-left: 0;
+}
+
+.destino{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bi-geo-fill{
+  padding: 6px;
+}
+
+.geo-alt-fill{
+  padding: 6px;
+}
+
+.bi-arrow-return-left{
+  padding: 6px;
+}
+
+.BarraRuta button{
+  border-color: white;
+  background-color: white;
+  border-style: solid;
+}
+
+input{
+  padding: 3px;
+  background-color: #e6f3ff;
+  border-radius: 20px;
+  margin: 5px;
+  border: 0;
+  outline-width: 0;
+  width: 100%;
+  font-size: 16px;
+}
+
+.menu-desplegable {
+  background-color: #E6F3FF;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  position: absolute;
+  z-index: 2;
+  top: 50px;
+  width: 190px;
+  height: 120px;
+  padding: 10px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.menu-desplegable ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu-desplegable li {
+  cursor: pointer;
+  padding: 5px 10px;
+  font-family: arial;
+  font-size: 20px;
+  font-weight: 500;
+  margin: 3px;
+  display: flex;
+  align-items: center;
+}
+
+.menu-desplegable span{
+  margin-left: 10px;
+}
+
+.menu-desplegable li:hover {
+  background-color: #f0f0f0;
+}
+
+.botones-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-flow: column wrap;
+  width: 100%;
+  height: 70px;
+  margin: auto;
+  padding-top: 10px;
+}
+
+.botonCombustible {
+  background-color: #0B4EAE;
+  border: none;
+  color: white;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  margin-left: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+  border-radius: 8px;
+  padding: 10px;
+  border-radius: 100px;
+}
+
+button.botonCombustible:hover{
+  background-color: #093E8B;
+}
+
+#rangevalue{
+  align-self: center;
+}
+.slider-container{
+  margin-left: 5px;
+  margin-right: 5px;
+  justify-content: center;
+  background: #f2f2f2;
+  border-radius: 30px;
+  margin-top: 15px;
+}
+.form-range{
+  width:50%;
+}
+
+.inferior{
+  display: flex;
+  align-content: flex-end;
+  justify-content: flex-end;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.bandera{
+  padding: 0;
+  margin: 20px;
+  margin-bottom: 35px;
+  border: 0;
+  width: 40px;
+  height: 20px;
+  font-size: 35px;
+  background-color: transparent;
+}
+
+.interfaz{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+
+
+}
+
+@media (max-width: 800px) {
+  .botones-container {
+    display: flex;
+    flex-direction: row;
+    align-content: space-between;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin: auto
+  }
+
+  .botonCombustible{
+    width: 45.5%;
+  }
+}
+
