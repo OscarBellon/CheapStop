@@ -27,6 +27,10 @@ document.getElementById("gasolina98").addEventListener("click", function () {
     cambioEstadoBotonesGasolina(combustibleIndice)
 });
 
+//Para que el que aparezca seleccionado sea la 95
+document.getElementById("gasolina98").style.backgroundColor="#093E8B";
+document.getElementById("diesel").style.backgroundColor="#093E8B";
+document.getElementById("dieselplus").style.backgroundColor="#093E8B";
 
 function cambioEstadoBotonesGasolina(combustibleActivo) {
     const botones=["gasolina95","gasolina98","diesel","dieselplus"];
