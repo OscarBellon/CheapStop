@@ -68,6 +68,7 @@ export async function mostrarRatio(map, markers, iconGas) {
               color: "blue", // color del borde
               fillColor: "#3388ff", // color de relleno
               fillOpacity: 0.2, // opacidad del relleno
+              interactive: false
             }).addTo(map);
 
             //El mapa se ajusta a la busqueda realizada 
