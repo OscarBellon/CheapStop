@@ -86,7 +86,6 @@ export function pushMarcadorInformacion(markers,infoGasolinera,map,iconGas,lista
     .then(content=>{
         console.log(content)
         let marcador = L.marker([parseFloat(infoGasolinera.Latitud.replace(",",".")),parseFloat(infoGasolinera["Longitud (WGS84)"].replace(",","."))],{icon: iconGas});
-
         var parser = new DOMParser();
         let doc = parser.parseFromString(content, 'text/html');
         doc.getElementById("gasNombre").textContent = infoGasolinera["Rótulo"];
