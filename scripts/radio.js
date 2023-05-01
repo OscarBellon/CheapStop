@@ -1,22 +1,26 @@
-import { buscador_gasolineras, buscadorInformacionGasolinera, presentadorGasolineras} from "./gasolineras.js";
+import { buscador_gasolineras, buscadorInformacionGasolinera, pushMarcadorInformacion} from "./gasolineras.js";
 import { baseLayer, borrarMierdaDelMapa } from "./script.js";
 
 
-export async function mostrarRatio(map, markers, iconGas, radio) {
+export async function mostrarRatio(map, markers, iconGas) {
   //Variables necesarias para mostrar las gasolineras dentro de un ratio
   var circle = null;
   var marks = L.layerGroup().addTo(map);
-
-  if(radio===null){
-    radio=2800;
-  }
+  var listaGasolineras = [];
+  console.log("Entro a mostrarRaio");
+  var radio = Number(localStorage.getItem('radio'));
   
+  if(isNaN(radio)) {
+    radio = 2800;
+  }
+  console.log(radio);
+
   //Mostrar gasolineras en ratio
-  document
-    .getElementById("ubicacion")
-    .addEventListener("keypress", function (e) {
-      if (e.keyCode === 13) {
-        e.preventDefault(); //Prevenir el envio del formulario
+  //document
+  //  .getElementById("ubicacion")
+  //  .addEventListener("keypress", function (e) {
+  //    if (e.keyCode === 13) {
+  //      e.preventDefault(); //Prevenir el envio del formulario
 
         borrarMierdaDelMapa(markers,baseLayer);
 
@@ -73,16 +77,22 @@ export async function mostrarRatio(map, markers, iconGas, radio) {
             // Llamar a la función para mostrar las gasolineras dentro del radio
             buscador_gasolineras(radio, ubicacionCoords).then(function (result) {
               console.log("Longitud: " + ubicacionCoords[0]);
-              presentadorGasolineras(markers, result, map, iconGas);
-              buscadorInformacionGasolinera(result);
+              buscadorInformacionGasolinera(result).then((info) => {
+                console.log(info);
+                listaGasolineras = [];
+                info.forEach((gasolinera) => {
+                  console.log(gasolinera);
+                  pushMarcadorInformacion( markers, gasolinera, map, iconGas, listaGasolineras);
+                });
+              });
             });
           });
       }
-    });
-}
+//    });
+//}
 
 
-export async function mostrarRatioActualizado(map, markers, iconGas, radio) {
+/*export async function mostrarRatioActualizado(map, markers, iconGas, radio) {
 
   var circle = null;
   var marks = L.layerGroup().addTo(map);
@@ -98,7 +108,7 @@ export async function mostrarRatioActualizado(map, markers, iconGas, radio) {
     }
   });*/
 
-  var ubicacion = document.getElementById("ubicacion").value;
+  /*var ubicacion = document.getElementById("ubicacion").value;
 
         //Obtener las coordenadas de la ubicación utilizando la API de OpenStreetMap
         var ubicacion_url =
@@ -145,4 +155,4 @@ export async function mostrarRatioActualizado(map, markers, iconGas, radio) {
             });
           });
 
-}
+}*/

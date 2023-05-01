@@ -1,7 +1,7 @@
 import { buscadorInformacionGasolinera } from "./gasolineras.js";
 import { buscador_gasolineras } from "./gasolineras.js";
 import { presentadorGasolineras } from "./gasolineras.js";
-import { mostrarRatio, mostrarRatioActualizado } from "./radio.js";
+import { mostrarRatio } from "./radio.js";
 import {busquedaOrigenDestino} from "./rutas.js";
 import { busacdorRuta } from "./rutas.js";
 import { pushMarcadorInformacion } from "./gasolineras.js";
@@ -32,6 +32,7 @@ export const baseLayer = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}
 
 //Variable que va a contener el radio del slider
 var radio=null;
+localStorage.setItem('radio',radio);
 
 //Crear capa de gasolineras vacia para agregar gasolineras encontradas
 var gasLayer = L.layerGroup().addTo(map);
@@ -78,7 +79,17 @@ export function borrarMierdaDelMapa(marcadores, layerBase){
 
 }
 
-mostrarRatio(map, markers, iconGas, radio);
+document
+  .getElementById("ubicacion")
+  .addEventListener("keypress", function (e) {
+    if (e.keyCode === 13) {
+      e.preventDefault(); //Prevenir el envio del formulario
+
+      mostrarRatio(map, markers, iconGas);
+
+    }
+});
+
 
 function rutaActualizada(radio){
     var origin = document.getElementById("origin").value;
@@ -142,20 +153,23 @@ document.getElementById("radio").addEventListener("click", () => {
   document.getElementById("slider-container").style.display = "flex";
   document.getElementById("menu-desplegable").style.display="none";
 });
-
-document.getElementById('customRange3').addEventListener('change', function() {
-  radio=this.value*1000;
-  //console.log(radio);
-  let elemento=document.getElementById("barraRuta");
-  let estiloElemeto=window.getComputedStyle(elemento);
-  if(estiloElemeto.display === 'none'){
-    mostrarRatioActualizado(map, markers, iconGas, radio);
-  }else{
-    rutaActualizada(radio);
-  }
+document.addEventListener("DOMContentLoaded", function() {
+  document.getElementById('customRange3').addEventListener('change', function() {
+    radio=this.value*1000;
+    //console.log(radio);
+    localStorage.setItem('radio',radio);
+    let elemento=document.getElementById("barraRuta");
+    let estiloElemeto=window.getComputedStyle(elemento);
+    if(estiloElemeto.display === 'none'){
+      //mostrarRatioActualizado(map, markers, iconGas, radio);
+      mostrarRatio(map,markers,iconGas);
+    }else{
+      rutaActualizada(radio);
+    }
+    console.log(localStorage.getItem('radio'));
   
+    });
 });
-
 
 document.getElementById("icono-usuario").addEventListener("click", function () {
   //document.getElementById("botones-container").style.display = "none";
