@@ -96,6 +96,7 @@ export function pushMarcadorInformacion(markers,infoGasolinera,map,iconGas,lista
         doc.getElementById("precioGasolina").textContent = infoGasolinera[combustible[combustibleIndice]] + " €";
         doc.getElementById("maps").href=ParsearUbcicacion(infoGasolinera["Dirección"],infoGasolinera["C.P."]);
         doc.getElementById("tipoGasolinaTexto").textContent=combustible[combustibleIndice];
+        doc.getElementById("horarioGasolinera").textContent=infoGasolinera.Horario;
         let cont= doc.querySelector("html").innerHTML
         let gasolinera={gasNombre: infoGasolinera["Rótulo"],gasPrecio:infoGasolinera[combustible[combustibleIndice]],html: cont}
         marcador.bindPopup(cont,{minWidth: 500}).openPopup();
