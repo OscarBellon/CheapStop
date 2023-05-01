@@ -90,13 +90,13 @@ export function pushMarcadorInformacion(markers,infoGasolinera,map,iconGas,lista
     .then(content=>{
         console.log(content)
         let marcador = L.marker([parseFloat(infoGasolinera.Latitud.replace(",",".")),parseFloat(infoGasolinera["Longitud (WGS84)"].replace(",","."))],{icon: iconGas});
-
         var parser = new DOMParser();
         let doc = parser.parseFromString(content, 'text/html');
         doc.getElementById("gasNombre").textContent = infoGasolinera["Rótulo"];
         doc.getElementById("precioGasolina").textContent = infoGasolinera[combustible[combustibleIndice]] + " €";
         doc.getElementById("maps").href=ParsearUbcicacion(infoGasolinera["Dirección"],infoGasolinera["C.P."]);
         doc.getElementById("tipoGasolinaTexto").textContent=combustible[combustibleIndice];
+        doc.getElementById("horarioGasolinera").textContent=infoGasolinera.Horario;
         let cont= doc.querySelector("html").innerHTML
         let gasolinera={gasNombre: infoGasolinera["Rótulo"],gasPrecio:infoGasolinera[combustible[combustibleIndice]],html: cont}
         marcador.bindPopup(cont,{minWidth: 500}).openPopup();
