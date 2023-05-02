@@ -40,7 +40,7 @@ var gasLayer = L.layerGroup().addTo(map);
 //Lista de marcadores
 var markers = [];
 var listaGasolineras=[];
-
+var combustibleIndice=0;
 
 var switchListaGasolineras=false;
 document.getElementById("gasolineraLista").addEventListener("click",function () {
@@ -260,9 +260,39 @@ function mostrarRatio(map, markers, iconGas) {
               buscadorInformacionGasolinera(result).then((info) => {
                 console.log(info);
                 listaGasolineras = [];
+                var gasolinerasEcontradas = [];
                 info.forEach((gasolinera) => {
                   console.log(gasolinera);
+                  gasolinerasEcontradas.push(gasolinera);
                   pushMarcadorInformacion( markers, gasolinera, map, iconGas, listaGasolineras);
+                });
+                  document.getElementById("diesel").addEventListener("click", function () {
+                    combustibleIndice=2;
+                    listaGasolineras=[];
+                    gasolinerasEcontradas.forEach((gasolinera) =>{
+                      pushMarcadorInformacion( markers, gasolinera, map, iconGas, listaGasolineras); 
+                    })
+                });
+                document.getElementById("gasolina95").addEventListener("click", function () {
+                    combustibleIndice=0;
+                    listaGasolineras=[];
+                    gasolinerasEcontradas.forEach((gasolinera) =>{
+                      pushMarcadorInformacion( markers, gasolinera, map, iconGas, listaGasolineras); 
+                    })
+                });
+                document.getElementById("dieselplus").addEventListener("click", function () {
+                    combustibleIndice=3;
+                    listaGasolineras=[];
+                    gasolinerasEcontradas.forEach((gasolinera) =>{
+                      pushMarcadorInformacion( markers, gasolinera, map, iconGas, listaGasolineras); 
+                    })
+                });
+                document.getElementById("gasolina98").addEventListener("click", function () {
+                    combustibleIndice=1;
+                    listaGasolineras=[];
+                    gasolinerasEcontradas.forEach((gasolinera) =>{
+                      pushMarcadorInformacion( markers, gasolinera, map, iconGas, listaGasolineras); 
+                    })
                 });
               });
             });
