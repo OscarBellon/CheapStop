@@ -9,21 +9,41 @@ let combustibleIndice = 0;
 document.getElementById("diesel").addEventListener("click", function () {
     combustibleIndice=2;
     console.log("diesel")
+    cambioEstadoBotonesGasolina(combustibleIndice)
 });
 document.getElementById("gasolina95").addEventListener("click", function () {
     combustibleIndice=0;
     console.log("95")
+    cambioEstadoBotonesGasolina(combustibleIndice)
 });
 document.getElementById("dieselplus").addEventListener("click", function () {
     combustibleIndice=3;
     console.log("pl")
+    cambioEstadoBotonesGasolina(combustibleIndice)
 });
 document.getElementById("gasolina98").addEventListener("click", function () {
     combustibleIndice=1;
     console.log("98")
+    cambioEstadoBotonesGasolina(combustibleIndice)
 });
 
+//Para que el que aparezca seleccionado sea la 95
+document.getElementById("gasolina98").style.backgroundColor="#093E8B";
+document.getElementById("diesel").style.backgroundColor="#093E8B";
+document.getElementById("dieselplus").style.backgroundColor="#093E8B";
 
+function cambioEstadoBotonesGasolina(combustibleActivo) {
+    const botones=["gasolina95","gasolina98","diesel","dieselplus"];
+    for (let i = 0; i < botones.length; i++) {
+        if(i==combustibleActivo){
+            document.getElementById(botones[i]).style.backgroundColor= "#0B4EAE";
+        }
+        else{
+            document.getElementById(botones[i]).style.backgroundColor="#093E8B";
+        }
+        
+    }
+}
 
 export async function buscador_gasolineras(radio, coords) {
     
@@ -76,6 +96,7 @@ export function pushMarcadorInformacion(markers,infoGasolinera,map,iconGas,lista
         doc.getElementById("precioGasolina").textContent = infoGasolinera[combustible[combustibleIndice]] + " €";
         doc.getElementById("maps").href=ParsearUbcicacion(infoGasolinera["Dirección"],infoGasolinera["C.P."]);
         doc.getElementById("tipoGasolinaTexto").textContent=combustible[combustibleIndice];
+        doc.getElementById("horarioGasolinera").textContent=infoGasolinera.Horario;
         let cont= doc.querySelector("html").innerHTML
         let gasolinera={gasNombre: infoGasolinera["Rótulo"],gasPrecio:infoGasolinera[combustible[combustibleIndice]],html: cont}
         marcador.bindPopup(cont,{minWidth: 500}).openPopup();
