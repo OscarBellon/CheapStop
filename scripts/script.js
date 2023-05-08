@@ -182,3 +182,6 @@ document.getElementById("icono-usuario").addEventListener("click", function () {
   }
 });
 
+document.getElementById("botonRegistrarse").addEventListener("click", function(){
+  window.location.href="formularioDeRegistro.html";
+})
