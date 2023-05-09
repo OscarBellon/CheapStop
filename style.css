@@ -274,6 +274,10 @@ button.botonCombustible:hover{
   background-color: transparent;
 }
 
+.bandera:hover{
+  transform: translateY(-10px);
+}
+
 .interfaz{
   display: flex;
   flex-direction: column;
