@@ -31,7 +31,7 @@ body{
 .titulo{
   font-family: arial;
   font-weight: bolder;
-  font-size: 28px;
+  font-size: 34px;
   margin: 10px;
   height: 30px;
   display: flex;
@@ -278,6 +278,51 @@ button.botonCombustible:hover{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+/*gaslist overflow*/
+#gas-list{
+  overflow: auto;
+}
+
+/*lineaepica*/
+#lineaEpica{
+  height: 3px;
+  width: 100%;
+  background-color: #FD8024;
+}
+
+/*CSS barra desplegable usuario*/
+
+#usuario-desplegable {
+  background-color: #0B4EAE;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  position: absolute;
+  right:0px;
+  top:50px;
+  padding: 15px;
+  z-index: 2;
+}
+
+#usuario-desplegable ul {
+  list-style-type: none;
+  border-radius: 5px;
+  margin: 0;
+  padding: 0;
+}
+
+#usuario-desplegable li {
+  cursor: pointer;
+  font-family: Arial;
+  padding: 5px 10px;
+  background-color: #FFCF00;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+#usuario-desplegable li:hover {
+  background-color: #f0f0f0;
 }
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {
