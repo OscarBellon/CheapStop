@@ -1,7 +1,7 @@
 import { buscadorInformacionGasolinera } from "./gasolineras.js";
 import { buscador_gasolineras } from "./gasolineras.js";
 import { presentadorGasolineras } from "./gasolineras.js";
-//import { mostrarRatio } from "./radio.js";
+import { mostrarRatio } from "./radio.js";
 import {busquedaOrigenDestino} from "./rutas.js";
 import { busacdorRuta } from "./rutas.js";
 import { pushMarcadorInformacion } from "./gasolineras.js";
@@ -182,119 +182,6 @@ document.getElementById("icono-usuario").addEventListener("click", function () {
   }
 });
 
-
-function mostrarRatio(map, markers, iconGas) {
-  //Variables necesarias para mostrar las gasolineras dentro de un ratio
-  var circle = null;
-  var marks = L.layerGroup().addTo(map);
-  console.log("Entro a mostrarRaio");
-  var radio = Number(localStorage.getItem('radio'));
-  
-  if(isNaN(radio)) {
-    radio = 2800;
-  }
-  console.log(radio);
-
-  //Mostrar gasolineras en ratio
-  //document
-  //  .getElementById("ubicacion")
-  //  .addEventListener("keypress", function (e) {
-  //    if (e.keyCode === 13) {
-  //      e.preventDefault(); //Prevenir el envio del formulario
-
-        borrarMierdaDelMapa(markers,baseLayer);
-
-        /*for (let j = 0; j < markers.length; j++) {
-          map.removeLayer(markers[j]);
-        };
-        map.eachLayer((layer) => {
-          if (layer !== baseLayer) {
-            map.removeLayer(layer);
-          }
-        });*/
-        
-
-        var ubicacion = document.getElementById("ubicacion").value;
-
-        //Obtener las coordenadas de la ubicación utilizando la API de OpenStreetMap
-        var ubicacion_url =
-          "https://nominatim.openstreetmap.org/search.php?q=" +
-          ubicacion +
-          "&format=jsonv2";
-        fetch(ubicacion_url)
-          .then(function (response) {
-            return response.json();
-          })
-          .then(function (data) {
-            console.log(data);
-            var ubicacionCoords = [
-              parseFloat(data[0].lat),
-              parseFloat(data[0].lon),
-            ]; //Coordenadas de la ubicación
-
-            console.log(ubicacionCoords);
-
-            //ELiminar marcadores
-            marks.clearLayers();
-
-            // Actualizar el círculo en el mapa
-            if (circle) {
-              map.removeLayer(circle);
-            }
-
-
-            circle = L.circle(ubicacionCoords, {
-              radius: radio, // radio en metros
-              color: "blue", // color del borde
-              fillColor: "#3388ff", // color de relleno
-              fillOpacity: 0.2, // opacidad del relleno
-              interactive: false
-            }).addTo(map);
-
-            //El mapa se ajusta a la busqueda realizada 
-            map.flyToBounds(circle.getBounds(), {duration: 1});
-
-            // Llamar a la función para mostrar las gasolineras dentro del radio
-            buscador_gasolineras(radio, ubicacionCoords).then(function (result) {
-              console.log("Longitud: " + ubicacionCoords[0]);
-              buscadorInformacionGasolinera(result).then((info) => {
-                console.log(info);
-                listaGasolineras = [];
-                var gasolinerasEcontradas = [];
-                info.forEach((gasolinera) => {
-                  console.log(gasolinera);
-                  gasolinerasEcontradas.push(gasolinera);
-                  pushMarcadorInformacion( markers, gasolinera, map, iconGas, listaGasolineras);
-                });
-                  document.getElementById("diesel").addEventListener("click", function () {
-                    combustibleIndice=2;
-                    listaGasolineras=[];
-                    gasolinerasEcontradas.forEach((gasolinera) =>{
-                      pushMarcadorInformacion( markers, gasolinera, map, iconGas, listaGasolineras); 
-                    })
-                });
-                document.getElementById("gasolina95").addEventListener("click", function () {
-                    combustibleIndice=0;
-                    listaGasolineras=[];
-                    gasolinerasEcontradas.forEach((gasolinera) =>{
-                      pushMarcadorInformacion( markers, gasolinera, map, iconGas, listaGasolineras); 
-                    })
-                });
-                document.getElementById("dieselplus").addEventListener("click", function () {
-                    combustibleIndice=3;
-                    listaGasolineras=[];
-                    gasolinerasEcontradas.forEach((gasolinera) =>{
-                      pushMarcadorInformacion( markers, gasolinera, map, iconGas, listaGasolineras); 
-                    })
-                });
-                document.getElementById("gasolina98").addEventListener("click", function () {
-                    combustibleIndice=1;
-                    listaGasolineras=[];
-                    gasolinerasEcontradas.forEach((gasolinera) =>{
-                      pushMarcadorInformacion( markers, gasolinera, map, iconGas, listaGasolineras); 
-                    })
-                });
-              });
-            });
-          });
-      }
+document.getElementById("botonRegistrarse").addEventListener("click", function(){
+  window.location.href="formularioDeRegistro.html";
+})
