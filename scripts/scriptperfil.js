@@ -1,4 +1,4 @@
-document.getElementById("icono-menu").addEventListener("click", function(){
+document.getElementById("icono-volver").addEventListener("click", function(){
     window.location.href="index.html";
   });
 
