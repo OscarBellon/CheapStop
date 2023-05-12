@@ -1,5 +1,16 @@
 
+var language = "es";
+
+export function getLanguage(){
+    return this.language;
+}
+
+export function setLAnguage(idioma){
+    this.language = idioma;
+}
+
 function changeLanguaje(idioma){
+    language = idioma;
     translate(idioma);
     translatePlaceholder(idioma);
 }
