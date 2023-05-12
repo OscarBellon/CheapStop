@@ -1,6 +1,3 @@
-
-var language = "es";
-
 export function getLanguage(){
     return this.language;
 }
@@ -8,6 +5,8 @@ export function getLanguage(){
 export function setLAnguage(idioma){
     this.language = idioma;
 }
+
+var language = "es";
 
 function changeLanguaje(idioma){
     language = idioma;

@@ -276,7 +276,13 @@ button.botonCombustible:hover{
 }
 
 .bandera:hover{
-  transform: translateY(-10px);
+  transform: translateY(-5px);
+}
+
+.bandera:active {
+  transform: rotate(360deg);
+  transition: transform 0.1s;
+  outline: none;
 }
 
 .interfaz{
