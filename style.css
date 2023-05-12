@@ -22,6 +22,7 @@ body{
   display: flex;
   flex-direction: row;
   align-items: center;
+  width: 90%;
 }
 
 .menu{
@@ -272,6 +273,10 @@ button.botonCombustible:hover{
   height: 20px;
   font-size: 35px;
   background-color: transparent;
+}
+
+.bandera:hover{
+  transform: translateY(-10px);
 }
 
 .interfaz{
