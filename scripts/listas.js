@@ -1,4 +1,4 @@
-import { getLanguage, updateNodes } from "./translate";
+import { getLanguage, updateNodes, translateCards} from "./translate.js";
 
 export function sortGasolineras(markers){
     markers.sort((a,b)=>parseFloat(a.gasPrecio)-parseFloat(b.gasPrecio))
@@ -12,7 +12,7 @@ export function listarGasolineras(listaGasolineras){
         node.innerHTML=gasolinera.html;
         document.getElementById("gas-list").appendChild(node) 
     });
-    translsateCards(getLanguage())
+    translateCards(getLanguage())
 }
 
 export function clearListaGasolineras(){
