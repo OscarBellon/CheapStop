@@ -182,6 +182,11 @@ document.getElementById("icono-usuario").addEventListener("click", function () {
   }
 });
 
-document.getElementById("botonRegistrarse").addEventListener("click", function(){
-  window.location.href="formularioDeRegistro.html";
-})
+
+  document.getElementById("registro").addEventListener("click", function(){
+    window.location.href="/Componentes/Sesion/formularioDeRegistro.html";
+  });
+
+  document.getElementById("login").addEventListener("click", function(){
+    window.location.href="/Componentes/Sesion/formularioDeLogin.html";
+  });
