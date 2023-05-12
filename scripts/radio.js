@@ -90,7 +90,13 @@ document.getElementById("gasolineraLista").addEventListener("click",function () 
       // Llamar a la función para mostrar las gasolineras dentro del radio
       buscador_gasolineras(radio, ubicacionCoords).then(function (result) {
         console.log("Longitud: " + ubicacionCoords[0]);
-        buscadorInformacionGasolinera(result).then((info) => {
+        listaGasolineras = []
+        buscadorInformacionGasolinera(result,markers,map,iconGas,listaGasolineras)
+        document.getElementById("diesel").addEventListener("click",()=>{
+          combustibleIndice=2;
+          pushMarcadorInformacion(markers,gasInfo,map,iconGas,listaGasolineras);
+        })
+        /*buscadorInformacionGasolinera(result).then((info) => {
           console.log(info);
           listaGasolineras = [];
           var gasolinerasEcontradas = [];
@@ -165,7 +171,7 @@ document.getElementById("gasolineraLista").addEventListener("click",function () 
                 );
               });
             });
-        });
+        });*/
       });
     });
 }
