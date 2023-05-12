@@ -8,7 +8,5 @@
    "diesel": "Diesel",
    "gasolina95": "95 Octane fuel",
    "dieselplus": "Diesel Plus",
-   "gasolina98": "98 Octane fuel",
-   "titulocgas": "Schedule:",
-   "tipoGasolinaTexto": "Price:"
+   "gasolina98": "98 Octane fuel"
 }
