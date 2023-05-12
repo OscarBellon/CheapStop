@@ -7,6 +7,7 @@ import { busacdorRuta } from "./rutas.js";
 import { pushMarcadorInformacion } from "./gasolineras.js";
 import { sortGasolineras } from "./listas.js";
 import { clearListaGasolineras } from "./listas.js";
+import { getGasolineraInfo } from "./fireStore.js";
 
 
 //Icono para gasolineras
@@ -104,22 +105,35 @@ function rutaActualizada(radio){
     //console.log("GOL DE LA UDE");
     busquedaOrigenDestino(origin,destination)
     .then(function (result){
-      console.log(result);
+      //console.log(result);
       busacdorRuta(result[0],result[1])
     .then(function (ruta){
       var rutaGasofa = L.polyline(ruta,{color: 'blue'}).addTo(map);
       buscador_gasolineras(radio,ruta).then(function (result) {
-        buscadorInformacionGasolinera(result).then(info =>{
+        buscadorInformacionGasolinera(result,markers,map,iconGas,listaGasolineras)
+        /*result.forEach(gasolinera => {
+          //console.log(gasolinera)
+          let coordGasolinera=gasolinera.split(",")
+            for (let i = 0; i < coordGasolinera.length; i++) {
+                var valorRedondeado= parseFloat(coordGasolinera[i]).toFixed(3);
+                coordGasolinera[i] = valorRedondeado;
+            }
+          //console.log(coordGasolinera)
+          let idgasolinera = coordGasolinera[1]+";"+coordGasolinera[0]
+          console.log(idgasolinera)
+          getGasolineraInfo(idgasolinera)
+        });*/
+        /*buscadorInformacionGasolinera(result).then(info =>{
           console.log(info)
           listaGasolineras=[];
           info.forEach(gasolinera =>{
           console.log(gasolinera);                  
           pushMarcadorInformacion(markers,gasolinera,map,iconGas,listaGasolineras);
         })
+      })*/
       })
-    })
-    //El mapa se ajusta a la ruta
-    map.flyToBounds(rutaGasofa.getBounds(), {duration: 1});
+      //El mapa se ajusta a la ruta
+      map.flyToBounds(rutaGasofa.getBounds(), {duration: 1});
     })
   })
 }

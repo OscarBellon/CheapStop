@@ -1,5 +1,5 @@
 export function sortGasolineras(markers){
-    markers.sort((a,b)=>parseFloat(a.gasPrecio.replace(",","."))-parseFloat(b.gasPrecio.replace(",",".")))
+    markers.sort((a,b)=>parseFloat(a.gasPrecio)-parseFloat(b.gasPrecio))
     console.log(markers);
     listarGasolineras(markers)
 }
