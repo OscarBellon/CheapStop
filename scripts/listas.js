@@ -1,3 +1,5 @@
+import { getLanguage, updateNodes } from "./translate";
+
 export function sortGasolineras(markers){
     markers.sort((a,b)=>parseFloat(a.gasPrecio)-parseFloat(b.gasPrecio))
     console.log(markers);
@@ -9,7 +11,8 @@ export function listarGasolineras(listaGasolineras){
         let node = document.createElement("div");
         node.innerHTML=gasolinera.html;
         document.getElementById("gas-list").appendChild(node) 
-    });   
+    });
+    translsateCards(getLanguage())
 }
 
 export function clearListaGasolineras(){
