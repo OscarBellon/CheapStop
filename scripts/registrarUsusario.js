@@ -23,6 +23,27 @@ function registrar() {
   var surname = document.getElementById('apellido').value;
   var email = document.getElementById('email').value;
   var password = document.getElementById('contraseña').value;
+  var repPassword = document.getElementById('repetir-contraseña').value;
+  
+  if(name.length < 3 || name.length > 30){
+    alert(`Nombre mayor que 3 y menor que 30`);
+    return;
+  }
+  if(surname.length < 3 || surname.length > 30){
+    alert(`Apellido mayor que 3 y menor que 30`);
+    return;
+  }
+  if(password.length < 8 || password.length > 20){
+    alert(`Contraseña mayor que 8 y menor que 20`);
+    return;
+  }
+  if(repPassword != password){
+    alert(`Contraseñas no coinciden`);
+    return;
+  }
+
+
+
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
