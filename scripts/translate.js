@@ -130,6 +130,29 @@ export function translateRegister(idioma){
 
 }
 
+export function translateProfile(idioma){
+
+    console.log("Traduciendo...")
+
+    switch(idioma){
+
+        case "es":
+            fetch("/translations/es_cards.json").then(result => result.json()).then(res => {updateProfile(res)});
+            break
+
+        case "en":
+            fetch("/translations/en_cards.json").then(result => result.json()).then(res => {updateProfile(res)});
+            break
+
+        case "eo":
+            console.log("Esperanto")
+            fetch("/translations/eo_card.json").then(result => result.json()).then(res => {updateProfile(res)});
+            break
+
+    }
+
+}
+
 function updatePlaceholders(docs){
 
     console.log(docs)
@@ -176,6 +199,17 @@ export function updateLogin(docs){
 }
 
 export function updateRegister(docs){
+    let ids = Object.keys(docs);
+    for(let i=0; i<ids.length;i++){
+        let id = ids[i];
+        console.log(id)
+        document.querySelectorAll("id").forEach(elemento => {
+            elemento.textContent=docs[id];
+        })
+    }
+}
+
+export function updateProfile(docs){
     let ids = Object.keys(docs);
     for(let i=0; i<ids.length;i++){
         let id = ids[i];
