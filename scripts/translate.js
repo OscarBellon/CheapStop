@@ -61,29 +61,6 @@ function translatePlaceholder(idioma){
 
 }
 
-function updatePlaceholders(docs){
-
-    console.log(docs)
-    let ids = Object.keys(docs);
-    for(let i=0; i<ids.length;i++){
-        let id = ids[i];
-        console.log(id)
-        document.getElementById(id).placeholder = docs[id];
-    }
-    
-}
-
-function updateWeb(docs){
-    console.log(docs)
-    let ids = Object.keys(docs);
-    for(let i=0; i<ids.length;i++){
-        let id = ids[i];
-        console.log(id)
-        document.getElementById(id).textContent = docs[id];
-    }
-
-}
-
 export function translateCards(idioma){
 
     console.log("Traduciendo...")
@@ -107,7 +84,98 @@ export function translateCards(idioma){
 
 }
 
+export function translateLogin(idioma){
+
+    console.log("Traduciendo...")
+
+    switch(idioma){
+
+        case "es":
+            fetch("/translations/es_cards.json").then(result => result.json()).then(res => {updateLogin(res)});
+            break
+
+        case "en":
+            fetch("/translations/en_cards.json").then(result => result.json()).then(res => {updateLogin(res)});
+            break
+
+        case "eo":
+            console.log("Esperanto")
+            fetch("/translations/eo_card.json").then(result => result.json()).then(res => {updateLogin(res)});
+            break
+
+    }
+
+}
+
+export function translateRegister(idioma){
+
+    console.log("Traduciendo...")
+
+    switch(idioma){
+
+        case "es":
+            fetch("/translations/es_cards.json").then(result => result.json()).then(res => {updateRegister(res)});
+            break
+
+        case "en":
+            fetch("/translations/en_cards.json").then(result => result.json()).then(res => {updateRegister(res)});
+            break
+
+        case "eo":
+            console.log("Esperanto")
+            fetch("/translations/eo_card.json").then(result => result.json()).then(res => {updateRegister(res)});
+            break
+
+    }
+
+}
+
+function updatePlaceholders(docs){
+
+    console.log(docs)
+    let ids = Object.keys(docs);
+    for(let i=0; i<ids.length;i++){
+        let id = ids[i];
+        console.log(id)
+        document.getElementById(id).placeholder = docs[id];
+    }
+    
+}
+
+function updateWeb(docs){
+    console.log(docs)
+    let ids = Object.keys(docs);
+    for(let i=0; i<ids.length;i++){
+        let id = ids[i];
+        console.log(id)
+        document.getElementById(id).textContent = docs[id];
+    }
+
+}
+
 export function updateNodes(docs){
+    let ids = Object.keys(docs);
+    for(let i=0; i<ids.length;i++){
+        let id = ids[i];
+        console.log(id)
+        document.querySelectorAll("id").forEach(elemento => {
+            elemento.textContent=docs[id];
+        })
+    }
+}
+
+export function updateLogin(docs){
+    let ids = Object.keys(docs);
+    for(let i=0; i<ids.length;i++){
+        let id = ids[i];
+        console.log(id)
+        document.querySelectorAll("id").forEach(elemento => {
+            elemento.textContent=docs[id];
+        })
+    }
+}
+
+export function updateRegister(docs){
     let ids = Object.keys(docs);
     for(let i=0; i<ids.length;i++){
         let id = ids[i];
