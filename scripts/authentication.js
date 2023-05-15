@@ -21,8 +21,6 @@ const auth = getAuth();
 function inicioSesion(){
     var email = document.getElementById('email').value;
     var password = document.getElementById('contraseña').value;
-    console.log(email);
-    console.log(password);
     signInWithEmailAndPassword(auth, email, password)
     .then(() => {
         alert('Inicio de sesion correcto');
