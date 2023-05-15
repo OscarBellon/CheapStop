@@ -301,10 +301,9 @@ button.botonCombustible:hover{
 
 #usuario-desplegable {
   background-color: #0B4EAE;
-  border: 1px solid #ccc;
   border-radius: 5px;
   position: absolute;
-  right:0px;
+  right:-1px;
   top:50px;
   padding: 15px;
   z-index: 2;
@@ -330,10 +329,6 @@ button.botonCombustible:hover{
   background-color: #f0f0f0;
 }
 
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-
-
-}
 
 @media (max-width: 800px) {
   .botones-container {
@@ -343,6 +338,10 @@ button.botonCombustible:hover{
     justify-content: flex-start;
     flex-wrap: wrap;
     margin: auto
+  }
+
+  .icono{
+    width: 65%;
   }
 
   .botonCombustible{
