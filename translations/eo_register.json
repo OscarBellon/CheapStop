@@ -1,0 +1,13 @@
+{
+    "login": "Ensalutu",
+    "registro": "Registriĝi",
+    "crearCLabel": "Krei konton",
+    "nombreLabel": "Nomo",
+    "apellidoLabel": "Familinomo",
+    "emailLabel": "Retpoŝto",
+    "contrasenaLabel": "Pasvorto",
+    "contrasenaRepLabel": "Ripeti pasvorton",
+    "fraseLabel": "Devas enhavi almenaŭ 8 ciferojn uzante literojn, ciferojn kaj almenaŭ 1 simbolon",
+    "pregCuentaLabel": "Ĉu vi jam havas konton?",
+    "pregSesionLabel": "Ensalutu"
+}

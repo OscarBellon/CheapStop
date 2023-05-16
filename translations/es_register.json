@@ -1,0 +1,13 @@
+{
+    "login": "Iniciar sesión",
+    "registro": "Registrarse",
+    "crearCLabel": "Crear cuenta",
+    "nombreLabel": "Nombre",
+    "apellidoLabel": "Apellido",
+    "emailLabel": "Email",
+    "contrasenaLabel": "Contraseña",
+    "contrasenaRepLabel": "Repetir contraseña",
+    "fraseLabel": "Debe contener letras de 8 dígitos, números y minimo 1 símbolo",
+    "pregCuentaLabel": "¿Ya tienes cuenta?",
+    "pregSesionLabel": "Inicia sesión"
+}
