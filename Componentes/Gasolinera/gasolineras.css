@@ -4,6 +4,9 @@
     border-width: 3px;
     border-style: solid;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    position: relative;
+    z-index: 1;
+    margin-top: 10px;
 }
 
 .linea{
@@ -29,7 +32,7 @@
     margin-bottom: 10px;
 }
 
-.titulo{
+.tituloc{
     padding-left: 20px;
     font-family: arial;
     margin-top: 10px;

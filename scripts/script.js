@@ -1,16 +1,22 @@
 import { buscadorInformacionGasolinera } from "./gasolineras.js";
 import { buscador_gasolineras } from "./gasolineras.js";
 import { presentadorGasolineras } from "./gasolineras.js";
-import { mostrarRatio, mostrarRatioActualizado } from "./radio.js";
+import { mostrarRatio } from "./radio.js";
 import {busquedaOrigenDestino} from "./rutas.js";
 import { busacdorRuta } from "./rutas.js";
+import { pushMarcadorInformacion } from "./gasolineras.js";
+import { sortGasolineras } from "./listas.js";
+import { clearListaGasolineras } from "./listas.js";
+import { getGasolineraInfo } from "./fireStore.js";
+import { getLanguage, translateLogin } from "./translate.js";
+
 
 //Icono para gasolineras
 var iconGas = new L.icon({
   //iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-orange.png',
   iconUrl: 'logo.png',
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-  iconSize: [25, 41],
+  iconSize: [41, 41],
   iconAnchor: [12, 41],
   popupAnchor: [1, -34],
   shadowSize: [41, 41]
@@ -28,12 +34,29 @@ export const baseLayer = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}
 
 //Variable que va a contener el radio del slider
 var radio=null;
+localStorage.setItem('radio',radio);
 
 //Crear capa de gasolineras vacia para agregar gasolineras encontradas
 var gasLayer = L.layerGroup().addTo(map);
 
 //Lista de marcadores
 var markers = [];
+var listaGasolineras=[];
+var combustibleIndice=0;
+
+var switchListaGasolineras=false;
+document.getElementById("gasolineraLista").addEventListener("click",function () {
+  if(!switchListaGasolineras){
+    sortGasolineras(listaGasolineras);
+    switchListaGasolineras=true;
+  }
+  else{
+    clearListaGasolineras()
+    switchListaGasolineras=false;
+  }
+  
+})
+
 //Envio del formulario de busqueda de gasolineras
 document
   .getElementById("destination")
@@ -58,14 +81,24 @@ export function borrarMierdaDelMapa(marcadores, layerBase){
 
 }
 
-mostrarRatio(map, markers, iconGas);
+document
+  .getElementById("ubicacion")
+  .addEventListener("keypress", function (e) {
+    if (e.keyCode === 13) {
+      e.preventDefault(); //Prevenir el envio del formulario
+
+      mostrarRatio(map, markers, iconGas);
+
+    }
+});
+
 
 function rutaActualizada(radio){
     var origin = document.getElementById("origin").value;
     var destination = document.getElementById("destination").value;
 
     if(radio===null){
-      radio=500;
+      radio=2800;
     }
 
     borrarMierdaDelMapa(markers,baseLayer);
@@ -73,42 +106,38 @@ function rutaActualizada(radio){
     //console.log("GOL DE LA UDE");
     busquedaOrigenDestino(origin,destination)
     .then(function (result){
-      console.log(result);
+      //console.log(result);
       busacdorRuta(result[0],result[1])
     .then(function (ruta){
       var rutaGasofa = L.polyline(ruta,{color: 'blue'}).addTo(map);
       buscador_gasolineras(radio,ruta).then(function (result) {
-        presentadorGasolineras(markers, result,map,iconGas);
+        buscadorInformacionGasolinera(result,markers,map,iconGas,listaGasolineras)
+        /*result.forEach(gasolinera => {
+          //console.log(gasolinera)
+          let coordGasolinera=gasolinera.split(",")
+            for (let i = 0; i < coordGasolinera.length; i++) {
+                var valorRedondeado= parseFloat(coordGasolinera[i]).toFixed(3);
+                coordGasolinera[i] = valorRedondeado;
+            }
+          //console.log(coordGasolinera)
+          let idgasolinera = coordGasolinera[1]+";"+coordGasolinera[0]
+          console.log(idgasolinera)
+          getGasolineraInfo(idgasolinera)
+        });*/
+        /*buscadorInformacionGasolinera(result).then(info =>{
+          console.log(info)
+          listaGasolineras=[];
+          info.forEach(gasolinera =>{
+          console.log(gasolinera);                  
+          pushMarcadorInformacion(markers,gasolinera,map,iconGas,listaGasolineras);
+        })
+      })*/
       })
       //El mapa se ajusta a la ruta
       map.flyToBounds(rutaGasofa.getBounds(), {duration: 1});
-      })
     })
+  })
 }
-
-//Eliminar marcadores al cambiar de pagina
-document.getElementById("volver").addEventListener("click", function (e){
-  /*for (let j = 0; j < markers.length; j++) {
-    map.removeLayer(markers[j]);
-  };
-  map.eachLayer((layer) => {
-    if (layer !== baseLayer) {
-      map.removeLayer(layer);
-    }
-  });*/
-  console.log("LoL xd");
-  //borrarMierdaDelMapa(markers,baseLayer);
-});
-
-document.getElementById("ruta").addEventListener("click", function (e){
-  /*map.eachLayer((layer) => {
-    if (layer !== baseLayer) {
-      map.removeLayer(layer);
-    }
-  });
-  console.log("Pene");*/
-  //borrarMierdaDelMapa(markers,baseLayer);
-});
 
 document.getElementById("icono-menu").addEventListener("click", function () {
   document.getElementById("botones-container").style.display = "none";
@@ -139,20 +168,23 @@ document.getElementById("radio").addEventListener("click", () => {
   document.getElementById("slider-container").style.display = "flex";
   document.getElementById("menu-desplegable").style.display="none";
 });
-
-document.getElementById('customRange3').addEventListener('change', function() {
-  radio=this.value*1000;
-  //console.log(radio);
-  let elemento=document.getElementById("barraRuta");
-  let estiloElemeto=window.getComputedStyle(elemento);
-  if(estiloElemeto.display === 'none'){
-    mostrarRatioActualizado(map, markers, iconGas, radio);
-  }else{
-    rutaActualizada(radio);
-  }
+document.addEventListener("DOMContentLoaded", function() {
+  document.getElementById('customRange3').addEventListener('change', function() {
+    radio=this.value*1000;
+    //console.log(radio);
+    localStorage.setItem('radio',radio);
+    let elemento=document.getElementById("barraRuta");
+    let estiloElemeto=window.getComputedStyle(elemento);
+    if(estiloElemeto.display === 'none'){
+      //mostrarRatioActualizado(map, markers, iconGas, radio);
+      mostrarRatio(map,markers,iconGas);
+    }else{
+      rutaActualizada(radio);
+    }
+    console.log(localStorage.getItem('radio'));
   
+    });
 });
-
 
 document.getElementById("icono-usuario").addEventListener("click", function () {
   //document.getElementById("botones-container").style.display = "none";
@@ -164,3 +196,12 @@ document.getElementById("icono-usuario").addEventListener("click", function () {
     dropdownMenu.style.display = "none";
   }
 });
+
+
+  document.getElementById("registro").addEventListener("click", function(){
+    window.location.href="/Componentes/Sesion/formularioDeRegistro.html";
+  });
+
+  document.getElementById("login").addEventListener("click", function(){
+    window.location.href="/Componentes/Sesion/formularioDeLogin.html";
+  });

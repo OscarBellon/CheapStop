@@ -22,6 +22,7 @@ body{
   display: flex;
   flex-direction: row;
   align-items: center;
+  width: 90%;
 }
 
 .menu{
@@ -31,7 +32,7 @@ body{
 .titulo{
   font-family: arial;
   font-weight: bolder;
-  font-size: 28px;
+  font-size: 34px;
   margin: 10px;
   height: 30px;
   display: flex;
@@ -125,12 +126,21 @@ body{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
+}
+
+.inputRuta{
+  margin: 7px;
+  padding: 7px;
+  padding-left: 10px;
+  margin-left: 0;
 }
 
 .destino{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 }
 
 .bi-geo-fill{
@@ -167,9 +177,12 @@ input{
   border: 1px solid #ccc;
   border-radius: 5px;
   position: absolute;
-  margin-left: 20px;
-  padding: 10px;
   z-index: 2;
+  top: 50px;
+  width: 190px;
+  height: 120px;
+  padding: 10px;
+  transition: transform 0.3s ease-in-out;
 }
 
 .menu-desplegable ul {
@@ -181,6 +194,16 @@ input{
 .menu-desplegable li {
   cursor: pointer;
   padding: 5px 10px;
+  font-family: arial;
+  font-size: 20px;
+  font-weight: 500;
+  margin: 3px;
+  display: flex;
+  align-items: center;
+}
+
+.menu-desplegable span{
+  margin-left: 10px;
 }
 
 .menu-desplegable li:hover {
@@ -193,7 +216,8 @@ input{
   flex-flow: column wrap;
   width: 100%;
   height: 70px;
-  margin: 20px auto;
+  margin: auto;
+  padding-top: 10px;
 }
 
 .botonCombustible {
@@ -208,6 +232,8 @@ input{
   margin-right: 10px;
   cursor: pointer;
   border-radius: 8px;
+  padding: 10px;
+  border-radius: 100px;
 }
 
 button.botonCombustible:hover{
@@ -249,48 +275,77 @@ button.botonCombustible:hover{
   background-color: transparent;
 }
 
+.bandera:hover{
+  transform: translateY(-5px);
+}
+
+.bandera:active {
+  transform: rotate(360deg);
+  transition: transform 0.1s;
+  outline: none;
+}
+
 .interfaz{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-
-
+/*gaslist overflow*/
+#gas-list{
+  overflow: auto;
 }
 
-@media (min-width: 800px) {
-  .botones-container {
-    height: 10px;
-  }
-}
 
+/*CSS barra desplegable usuario*/
 
 #usuario-desplegable {
   background-color: #0B4EAE;
-  border: 1px solid #ccc;
   border-radius: 5px;
   position: absolute;
- 
-  margin-right: 20px;
-  padding: 10px;
+  right:-1px;
+  top:50px;
+  padding: 15px;
   z-index: 2;
 }
 
 #usuario-desplegable ul {
   list-style-type: none;
+  border-radius: 5px;
   margin: 0;
   padding: 0;
 }
 
 #usuario-desplegable li {
   cursor: pointer;
+  font-family: Arial;
   padding: 5px 10px;
   background-color: #FFCF00;
   margin-bottom: 10px;
+  font-size: 20px;
 }
 
 #usuario-desplegable li:hover {
   background-color: #f0f0f0;
 }
+
+
+@media (max-width: 800px) {
+  .botones-container {
+    display: flex;
+    flex-direction: row;
+    align-content: space-between;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin: auto
+  }
+
+  .icono{
+    width: 65%;
+  }
+
+  .botonCombustible{
+    width: 45.5%;
+  }
+}
+
