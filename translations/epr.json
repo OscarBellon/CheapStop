@@ -8,5 +8,8 @@
    "diesel": "Diesel",
    "gasolina95": "Benzino 95",
    "dieselplus": "Diesel Plus",
-   "gasolina98": "Benzino 98"
+   "gasolina98": "Benzino 98",
+   "perfil": "Profilo",
+   "preferencias": "Preferoj",
+   "logout": "Elsaluti"
 }

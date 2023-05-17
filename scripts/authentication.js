@@ -1,7 +1,7 @@
 import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js";
-
+import { getFirestore, getDoc, doc } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js";
+import { translate, translatePlaceholder } from './translate.js';
 const firebaseConfig = {
   apiKey: "AIzaSyBLVWteUKxzpjeVIp3XGV940UEN1o_WRMA",
   authDomain: "cheapstop-ba4b1.firebaseapp.com",
@@ -22,9 +22,17 @@ function inicioSesion(){
     var email = document.getElementById('email').value;
     var password = document.getElementById('contraseña').value;
     signInWithEmailAndPassword(auth, email, password)
-    .then(() => {
-        alert('Inicio de sesion correcto');
-        window.location.href="../../index.html";
+    .then((userCredentials) => {
+      var user = userCredentials.user;
+        //alert('Inicio de sesion correcto');
+        const ref = doc(db, 'usuarios', user.uid);
+        const current = getDoc(ref).then((data) => {
+          const userData = data.data();
+          localStorage.setItem('radio', userData.radio)
+          localStorage.setItem('combustible', userData.combustible)
+          localStorage.setItem('language', userData.idioma)
+          window.location.href="../../index.html";
+        })
       })
       .catch((error) => {
         var errorMessage = error.message;           
@@ -32,6 +40,6 @@ function inicioSesion(){
     });
 }
 
-document.getElementById("signIn").addEventListener("click", () => {
+document.getElementById("signInBoton").addEventListener("click", () => {
     inicioSesion();
 });

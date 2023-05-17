@@ -8,5 +8,8 @@
    "diesel": "Diesel",
    "gasolina95": "95 Octane fuel",
    "dieselplus": "Diesel Plus",
-   "gasolina98": "98 Octane fuel"
+   "gasolina98": "98 Octane fuel",
+   "perfil": "Profile",
+   "preferencias": "Preferences",
+   "logout": "Log out"
 }

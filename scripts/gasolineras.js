@@ -6,8 +6,11 @@ let combustible = [
     "Gasoleo",
     "GasoleoPlus"
 ]
-let combustibleIndice = 0;
 
+var combustibleIndice = localStorage.getItem('combustible');
+if (!localStorage.getItem('combustible')) {
+  localStorage.setItem('combustible', 0);
+}
 document.getElementById("diesel").addEventListener("click", function () {
     combustibleIndice=2;
     console.log("diesel")
@@ -30,9 +33,7 @@ document.getElementById("gasolina98").addEventListener("click", function () {
 });
 
 //Para que el que aparezca seleccionado sea la 95
-document.getElementById("gasolina98").style.backgroundColor="#093E8B";
-document.getElementById("diesel").style.backgroundColor="#093E8B";
-document.getElementById("dieselplus").style.backgroundColor="#093E8B";
+cambioEstadoBotonesGasolina(localStorage.getItem('combustible'));
 
 function cambioEstadoBotonesGasolina(combustibleActivo) {
     const botones=["gasolina95","gasolina98","diesel","dieselplus"];

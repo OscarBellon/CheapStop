@@ -8,7 +8,7 @@ import { pushMarcadorInformacion } from "./gasolineras.js";
 import { sortGasolineras } from "./listas.js";
 import { clearListaGasolineras } from "./listas.js";
 import { getGasolineraInfo } from "./fireStore.js";
-
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
 
 //Icono para gasolineras
 var iconGas = new L.icon({
@@ -32,16 +32,17 @@ export const baseLayer = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}
 }).addTo(map);
 
 //Variable que va a contener el radio del slider
-var radio=null;
-localStorage.setItem('radio',radio);
-
+var radio = localStorage.getItem('radio');
+if (!localStorage.getItem('radio')) {
+  localStorage.setItem('radio', 2800);
+}
+console.log("RADIO ESCOGIDO "+radio)
 //Crear capa de gasolineras vacia para agregar gasolineras encontradas
 var gasLayer = L.layerGroup().addTo(map);
 
 //Lista de marcadores
 var markers = [];
 var listaGasolineras=[];
-var combustibleIndice=0;
 
 var switchListaGasolineras=false;
 document.getElementById("gasolineraLista").addEventListener("click",function () {
@@ -184,7 +185,8 @@ document.addEventListener("DOMContentLoaded", function() {
   
     });
 });
-
+document.getElementById("rangevalue").innerHTML = localStorage.getItem('radio')/1000 + "Km";
+document.getElementById('customRange3').value = parseFloat(localStorage.getItem('radio')/1000)
 document.getElementById("icono-usuario").addEventListener("click", function () {
   //document.getElementById("botones-container").style.display = "none";
   //document.getElementById("slider-container").style.display = "none";
@@ -196,11 +198,53 @@ document.getElementById("icono-usuario").addEventListener("click", function () {
   }
 });
 
+const auth = getAuth();
+  onAuthStateChanged(auth, (user) => {
+    const usuarioDesplegable = document.getElementById('usuario-desplegable');
 
-  document.getElementById("registro").addEventListener("click", function(){
-    window.location.href="/Componentes/Sesion/formularioDeRegistro.html";
-  });
-
-  document.getElementById("login").addEventListener("click", function(){
-    window.location.href="/Componentes/Sesion/formularioDeLogin.html";
+    if (user) {
+      // Usuario logeado
+      usuarioDesplegable.innerHTML = `
+        <ul>
+          <li id="perfil">Perfil</li>
+          <li id="preferencias">Preferencias</li>
+          <li id="logout">Cerrar sesión</li>
+          <li id="login" style="display:none">Iniciar sesión</li>
+					<li id="registro" style="display:none">Registrarse</li>
+        </ul>
+      `;
+      document.getElementById("logout").addEventListener('click', () => {
+        auth.signOut()
+        .then(() => { 
+          localStorage.setItem('radio', 2800)
+          localStorage.setItem('combustible', 0)
+          window.location.href="./index.html"; 
+        })
+        .catch(error => {console.error(error);})
+      })
+      document.getElementById("preferencias").addEventListener("click", function(){
+        window.location.href="/Componentes/Sesion/preferencias.html";
+      });
+    
+      document.getElementById("perfil").addEventListener("click", function(){
+        window.location.href="/Componentes/Sesion/perfil.html";
+      });
+    } else {
+      // Usuario no logeado
+      usuarioDesplegable.innerHTML = `
+        <ul>
+          <li id="login">Iniciar sesión</li>
+          <li id="registro">Registrarse</li>
+        </ul>
+      `;
+      document.getElementById("registro").addEventListener("click", function(){
+        window.location.href="/Componentes/Sesion/formularioDeRegistro.html";
+      });
+    
+      document.getElementById("login").addEventListener("click", function(){
+        window.location.href="/Componentes/Sesion/formularioDeLogin.html";
+      });
+    }
+  
+    usuarioDesplegable.style.display = 'block';
   });
