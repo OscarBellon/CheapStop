@@ -47,7 +47,7 @@ function registrar() {
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
-      const userProfile = {uid: user.uid, nombre: name, apellido: surname, email: email, password: password}
+      const userProfile = {uid: user.uid, nombre: name, apellido: surname, email: email, password: password, radio: "2800", idioma:localStorage.getItem('language'), combustible:"gasolina95"}
       addUser(userProfile)
       alert('Usuario registrado!');
     })
