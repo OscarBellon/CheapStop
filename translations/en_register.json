@@ -9,5 +9,6 @@
     "contrasenaRepLabel": "Repeat password",
     "fraseLabel": "Must contain at least 8 digits using letters, numbers and at least 1 symbol",
     "pregCuentaLabel": "Do you already have an account?",
+    "createAccount": "Create Account",
     "pregSesionLabel": "Log in"
 }

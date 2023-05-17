@@ -1,21 +1,27 @@
-var language = "es";
-
+//var language = "es";
 export function getLanguage(){
-    language;
+   //return language;
+    if (!localStorage.getItem('language')) {
+        localStorage.setItem('language', 'es');
+    }
+    return localStorage.getItem('language');
 }
 
-export function setLAnguage(idioma){
-    language = idioma;
+export function setLanguage(idioma){
+    //language = idioma;
+    localStorage.setItem('language', idioma);
+    console.log(localStorage.getItem('language'));
 }
 
 function changeLanguaje(idioma){
-    language = idioma;
+    //language = idioma;
+    setLanguage(idioma);
     translate(idioma);
     translatePlaceholder(idioma);
     translateCards(idioma);
 }
 
-function translate(idioma){ 
+export function translate(idioma){ 
 
     console.log("Traduciendo...")
 
@@ -38,7 +44,7 @@ function translate(idioma){
 
 }
 
-function translatePlaceholder(idioma){
+export function translatePlaceholder(idioma){
 
     console.log("Traduciendo...")
 
@@ -77,7 +83,7 @@ export function translateCards(idioma){
 
         case "eo":
             console.log("Esperanto")
-            fetch("/translations/eo_card.json").then(result => result.json()).then(res => {updateNodes(res)});
+            fetch("/translations/eo_cards.json").then(result => result.json()).then(res => {updateNodes(res)});
             break
 
     }
@@ -87,20 +93,21 @@ export function translateCards(idioma){
 export function translateLogin(idioma){
 
     console.log("Traduciendo...")
+    console.log("Idioma");
 
     switch(idioma){
 
         case "es":
-            fetch("/translations/es_cards.json").then(result => result.json()).then(res => {updateLogin(res)});
+            fetch("/translations/es_login.json").then(result => result.json()).then(res => {updateLogin(res)});
             break
 
         case "en":
-            fetch("/translations/en_cards.json").then(result => result.json()).then(res => {updateLogin(res)});
+            fetch("/translations/en_login.json").then(result => result.json()).then(res => {updateLogin(res)});
             break
 
         case "eo":
             console.log("Esperanto")
-            fetch("/translations/eo_card.json").then(result => result.json()).then(res => {updateLogin(res)});
+            fetch("/translations/eo_login.json").then(result => result.json()).then(res => {updateLogin(res)});
             break
 
     }
@@ -114,16 +121,16 @@ export function translateRegister(idioma){
     switch(idioma){
 
         case "es":
-            fetch("/translations/es_cards.json").then(result => result.json()).then(res => {updateRegister(res)});
+            fetch("/translations/es_register.json").then(result => result.json()).then(res => {updateRegister(res)});
             break
 
         case "en":
-            fetch("/translations/en_cards.json").then(result => result.json()).then(res => {updateRegister(res)});
+            fetch("/translations/en_register.json").then(result => result.json()).then(res => {updateRegister(res)});
             break
 
         case "eo":
             console.log("Esperanto")
-            fetch("/translations/eo_card.json").then(result => result.json()).then(res => {updateRegister(res)});
+            fetch("/translations/eo_register.json").then(result => result.json()).then(res => {updateRegister(res)});
             break
 
     }
@@ -137,16 +144,39 @@ export function translateProfile(idioma){
     switch(idioma){
 
         case "es":
-            fetch("/translations/es_cards.json").then(result => result.json()).then(res => {updateProfile(res)});
+            fetch("/translations/es_perfil.json").then(result => result.json()).then(res => {updateProfile(res)});
             break
 
         case "en":
-            fetch("/translations/en_cards.json").then(result => result.json()).then(res => {updateProfile(res)});
+            fetch("/translations/en_perfil.json").then(result => result.json()).then(res => {updateProfile(res)});
             break
 
         case "eo":
             console.log("Esperanto")
-            fetch("/translations/eo_card.json").then(result => result.json()).then(res => {updateProfile(res)});
+            fetch("/translations/eo_perfil.json").then(result => result.json()).then(res => {updateProfile(res)});
+            break
+
+    }
+
+}
+
+export function translatePreferences(idioma){
+
+    console.log("Traduciendo...")
+
+    switch(idioma){
+
+        case "es":
+            fetch("/translations/es_preferences.json").then(result => result.json()).then(res => {updatePreferences(res)});
+            break
+
+        case "en":
+            fetch("/translations/en_preferences.json").then(result => result.json()).then(res => {updatePreferences(res)});
+            break
+
+        case "eo":
+            console.log("Esperanto")
+            fetch("/translations/eo_preferences.json").then(result => result.json()).then(res => {updatePreferences(res)});
             break
 
     }
@@ -188,38 +218,112 @@ export function updateNodes(docs){
 }
 
 export function updateLogin(docs){
+    console.log("Ha comenzado la traduccion del Login");
     let ids = Object.keys(docs);
     for(let i=0; i<ids.length;i++){
         let id = ids[i];
-        console.log(id)
-        document.querySelectorAll("id").forEach(elemento => {
-            elemento.textContent=docs[id];
-        })
+        let element = document.getElementById(id);
+        if(element) {
+            if(element.nodeName === "INPUT") {
+                if (element.placeholder !== undefined && element.placeholder !== '') {
+                    element.placeholder = docs[id];
+                } else {
+                    element.value = docs[id];
+                }
+            } else {
+                element.textContent = docs[id];
+            }
+        }
     }
+    console.log("Ha terminado");
 }
 
 export function updateRegister(docs){
+    console.log("Ha comenzado la traduccion del Register");
     let ids = Object.keys(docs);
     for(let i=0; i<ids.length;i++){
         let id = ids[i];
-        console.log(id)
-        document.querySelectorAll("id").forEach(elemento => {
-            elemento.textContent=docs[id];
-        })
+        let element = document.getElementById(id);
+        if(element) {
+            if(element.nodeName === "INPUT") {
+                if (element.placeholder !== undefined && element.placeholder !== '') {
+                    element.placeholder = docs[id];
+                } else {
+                    element.value = docs[id];
+                }
+            } else {
+                element.textContent = docs[id];
+            }
+        }
     }
+    console.log("Ha terminado");
 }
 
 export function updateProfile(docs){
+    console.log("Ha comenzado la traduccion del Perfil");
     let ids = Object.keys(docs);
     for(let i=0; i<ids.length;i++){
         let id = ids[i];
-        console.log(id)
-        document.querySelectorAll("id").forEach(elemento => {
-            elemento.textContent=docs[id];
-        })
+        let element = document.getElementById(id);
+        if(element) {
+            if(element.nodeName === "INPUT") {
+                if (element.placeholder !== undefined && element.placeholder !== '') {
+                    element.placeholder = docs[id];
+                } else {
+                    element.value = docs[id];
+                }
+            } else {
+                element.textContent = docs[id];
+            }
+        }
     }
+    console.log("Ha terminado");
 }
 
-document.getElementById("idiomaeo").addEventListener("click", () => {changeLanguaje("eo")});
+export function updatePreferences(docs){
+    console.log("Ha comenzado la traducción de las Preferencias");
+    let ids = Object.keys(docs);
+    for(let i=0; i<ids.length;i++){
+        let id = ids[i];
+        let elements = document.querySelectorAll(`[data-translate=${id}]`);
+        elements.forEach(element => {
+            if(element.nodeName === "INPUT") {
+                if (element.placeholder !== undefined && element.placeholder !== '') {
+                    element.placeholder = docs[id];
+                } else {
+                    element.value = docs[id];
+                }
+            } else if(element.nodeName === "SELECT") {
+                for (let option of element.options) {
+                    if (docs[option.getAttribute('data-translate')]) {
+                        option.textContent = docs[option.getAttribute('data-translate')];
+                    }
+                }
+            } else {
+                element.textContent = docs[id];
+            }
+        })
+    }
+    console.log("Ha terminado");
+}
+
+/*document.getElementById("idiomaeo").addEventListener("click", () => {changeLanguaje("eo")});
 document.getElementById("idiomaes").addEventListener("click", () => {changeLanguaje("es")});
-document.getElementById("idiomaen").addEventListener("click", () => {changeLanguaje("en")});
+document.getElementById("idiomaen").addEventListener("click", () => {changeLanguaje("en")});*/
+window.addEventListener('DOMContentLoaded', (event) => {
+    const idiomaEn = document.getElementById("idiomaen");
+    const idiomaEs = document.getElementById("idiomaes");
+    const idiomaEo = document.getElementById("idiomaeo");
+
+    if (idiomaEn) {
+        idiomaEn.addEventListener("click", () => {changeLanguaje("en")});
+    }
+
+    if (idiomaEs) {
+        idiomaEs.addEventListener("click", () => {changeLanguaje("es")});
+    }
+
+    if (idiomaEo) {
+        idiomaEo.addEventListener("click", () => {changeLanguaje("eo")});
+    }
+});

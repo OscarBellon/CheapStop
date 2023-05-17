@@ -71,7 +71,13 @@
             </div>
             <div class="my-5"></div>
         </div>
-        
+        <script type="module">
+            import { translatePreferences, getLanguage } from '/scripts/translate.js';
+            console.log(localStorage.getItem('language'));
+            window.addEventListener('DOMContentLoaded', (event) =>{
+                translatePreferences(getLanguage());
+            })
+        </script>
         
         
     </div>

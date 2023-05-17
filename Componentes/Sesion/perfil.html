@@ -69,4 +69,11 @@
               </svg>
             <strong id="eliCuentaLabel">Eliminar cuenta</strong></button>
     </div>
+    <script type="module">
+        import { translateProfile, getLanguage } from '/scripts/translate.js';
+        console.log(localStorage.getItem('language'));
+        window.addEventListener('DOMContentLoaded', (event) =>{
+            translateProfile(getLanguage());
+        })
+    </script>
 </body>

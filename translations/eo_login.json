@@ -1,9 +1,11 @@
 {
     "login": "Ensaluti",
-    "registro": "Kontrolu",
-    "tituloSesion": "Ensaluti",
+    "registro": "Registriĝu",
+    "tituloLogLabel": "Ensaluti",
     "nombreLabelLog": "Retpoŝto",
     "contrasenaLabelLog": "Pasvorto",
-    "pregNoCuentaLabel": "Vi ne havas konton?",
-    "pregRegLabel": "Aliĝu"
+    "signInBoton": "Ensaluti",
+    "signIn": "Ensaluti",
+    "pregNoCuentaLabel": "Ĉu vi ne havas konton?",
+    "pregRegLabel": "Registriĝu"
 }

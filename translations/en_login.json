@@ -1,6 +1,11 @@
 {
     "login": "Log in",
     "registro": "Register",
-    "tituloSesion": "Log in"
-    
+    "tituloLogLabel": "Log in",
+    "nombreLabelLog": "Email",
+    "contrasenaLabelLog": "Password",
+    "signInBoton": "Log In",
+    "signIn": "Log in",
+    "pregNoCuentaLabel": "Don't have an account?",
+    "pregRegLabel": "Register"
 }

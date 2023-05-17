@@ -9,5 +9,6 @@
     "contrasenaRepLabel": "Repetir contraseña",
     "fraseLabel": "Debe contener letras de 8 dígitos, números y minimo 1 símbolo",
     "pregCuentaLabel": "¿Ya tienes cuenta?",
+    "createAccount": "Crear cuenta",
     "pregSesionLabel": "Inicia sesión"
 }
