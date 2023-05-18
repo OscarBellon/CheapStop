@@ -7,8 +7,9 @@ import { busacdorRuta } from "./rutas.js";
 import { pushMarcadorInformacion } from "./gasolineras.js";
 import { sortGasolineras } from "./listas.js";
 import { clearListaGasolineras } from "./listas.js";
-
-
+import { getGasolineraInfo } from "./fireStore.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
+import { translate } from './translate.js'
 //Icono para gasolineras
 var iconGas = new L.icon({
   //iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-orange.png',
@@ -31,16 +32,17 @@ export const baseLayer = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}
 }).addTo(map);
 
 //Variable que va a contener el radio del slider
-var radio=null;
-localStorage.setItem('radio',radio);
-
+var radio = localStorage.getItem('radio');
+if (!localStorage.getItem('radio')) {
+  localStorage.setItem('radio', 2800);
+}
+console.log("RADIO ESCOGIDO "+radio)
 //Crear capa de gasolineras vacia para agregar gasolineras encontradas
 var gasLayer = L.layerGroup().addTo(map);
 
 //Lista de marcadores
 var markers = [];
 var listaGasolineras=[];
-var combustibleIndice=0;
 
 var switchListaGasolineras=false;
 document.getElementById("gasolineraLista").addEventListener("click",function () {
@@ -63,7 +65,7 @@ document
       e.preventDefault(); //Prevenir el envio del formulario
 
       rutaActualizada(radio);
-
+      translateCards(getLanguage());
     }
 });
   
@@ -104,22 +106,35 @@ function rutaActualizada(radio){
     //console.log("GOL DE LA UDE");
     busquedaOrigenDestino(origin,destination)
     .then(function (result){
-      console.log(result);
+      //console.log(result);
       busacdorRuta(result[0],result[1])
     .then(function (ruta){
       var rutaGasofa = L.polyline(ruta,{color: 'blue'}).addTo(map);
       buscador_gasolineras(radio,ruta).then(function (result) {
-        buscadorInformacionGasolinera(result).then(info =>{
+        buscadorInformacionGasolinera(result,markers,map,iconGas,listaGasolineras)
+        /*result.forEach(gasolinera => {
+          //console.log(gasolinera)
+          let coordGasolinera=gasolinera.split(",")
+            for (let i = 0; i < coordGasolinera.length; i++) {
+                var valorRedondeado= parseFloat(coordGasolinera[i]).toFixed(3);
+                coordGasolinera[i] = valorRedondeado;
+            }
+          //console.log(coordGasolinera)
+          let idgasolinera = coordGasolinera[1]+";"+coordGasolinera[0]
+          console.log(idgasolinera)
+          getGasolineraInfo(idgasolinera)
+        });*/
+        /*buscadorInformacionGasolinera(result).then(info =>{
           console.log(info)
           listaGasolineras=[];
           info.forEach(gasolinera =>{
           console.log(gasolinera);                  
           pushMarcadorInformacion(markers,gasolinera,map,iconGas,listaGasolineras);
         })
+      })*/
       })
-    })
-    //El mapa se ajusta a la ruta
-    map.flyToBounds(rutaGasofa.getBounds(), {duration: 1});
+      //El mapa se ajusta a la ruta
+      map.flyToBounds(rutaGasofa.getBounds(), {duration: 1});
     })
   })
 }
@@ -170,6 +185,8 @@ document.addEventListener("DOMContentLoaded", function() {
   
     });
 });
+document.getElementById("rangevalue").innerHTML = localStorage.getItem('radio')/1000 + "Km";
+document.getElementById('customRange3').value = parseFloat(localStorage.getItem('radio')/1000)
 document.getElementById("icono-usuario").addEventListener("click", function () {
   //document.getElementById("botones-container").style.display = "none";
   //document.getElementById("slider-container").style.display = "none";
@@ -180,11 +197,56 @@ document.getElementById("icono-usuario").addEventListener("click", function () {
     dropdownMenu.style.display = "none";
   }
 });
-document.getElementById("botonRegistrarse").addEventListener("click", function(){
-  window.location.href="formularioDeRegistro.html";
-});
 
-document.getElementById("botonIniciarSesion").addEventListener("click", function(){
-  window.location.href="formularioDeLogin.html";
-});
+const auth = getAuth();
+  onAuthStateChanged(auth, (user) => {
+    const usuarioDesplegable = document.getElementById('usuario-desplegable');
 
+    if (user) {
+      // Usuario logeado
+      usuarioDesplegable.innerHTML = `
+        <ul>
+          <li id="perfil">Perfil</li>
+          <li id="preferencias">Preferencias</li>
+          <li id="logout">Cerrar sesión</li>
+          <li id="login" style="display:none">Iniciar sesión</li>
+					<li id="registro" style="display:none">Registrarse</li>
+        </ul>
+      `;
+      translate(localStorage.getItem('language'));
+      document.getElementById("logout").addEventListener('click', () => {
+        auth.signOut()
+        .then(() => { 
+          localStorage.setItem('radio', 2800)
+          localStorage.setItem('combustible', 0)
+          window.location.href="./index.html"; 
+        })
+        .catch(error => {console.error(error);})
+      })
+      document.getElementById("preferencias").addEventListener("click", function(){
+        window.location.href="/Componentes/Sesion/preferencias.html";
+      });
+    
+      document.getElementById("perfil").addEventListener("click", function(){
+        window.location.href="/Componentes/Sesion/perfil.html";
+      });
+    } else {
+      // Usuario no logeado
+      usuarioDesplegable.innerHTML = `
+        <ul>
+          <li id="login">Iniciar sesión</li>
+          <li id="registro">Registrarse</li>
+        </ul>
+      `;
+      translate(localStorage.getItem('language'));
+      document.getElementById("registro").addEventListener("click", function(){
+        window.location.href="/Componentes/Sesion/formularioDeRegistro.html";
+      });
+    
+      document.getElementById("login").addEventListener("click", function(){
+        window.location.href="/Componentes/Sesion/formularioDeLogin.html";
+      });
+    }
+  
+    usuarioDesplegable.style.display = 'block';
+  });

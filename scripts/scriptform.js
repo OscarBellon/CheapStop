@@ -10,13 +10,13 @@ document.getElementById("icono-usuario").addEventListener("click", function () {
 });
 
 
-  document.getElementById("botonRegistrarse").addEventListener("click", function(){
-    window.location.href="formularioDeRegistro.html";
+  document.getElementById("registro").addEventListener("click", function(){
+    window.location.href="/Componentes/Sesion/formularioDeRegistro.html";
   });
 
-  document.getElementById("botonIniciarSesion").addEventListener("click", function(){
-    window.location.href="formularioDeLogin.html";
+  document.getElementById("login").addEventListener("click", function(){
+    window.location.href="/Componentes/Sesion/formularioDeLogin.html";
   });
   document.getElementById("icono-volver").addEventListener("click", function(){
-    window.location.href="index.html";
+    window.location.href="../../../index.html";
   });

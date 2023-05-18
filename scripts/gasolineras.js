@@ -1,11 +1,16 @@
+import { getGasolineraInfo } from "./fireStore.js";
+import { translateCards} from "./translate.js";
 let combustible = [
-    "Precio Gasolina 95 E5",
-    "Precio Gasolina 98 E5",
-    "Precio Gasoleo A",
-    "Precio Gasoleo Premium"
+    "Gasolina95E5",
+    "Gasolina98E5",
+    "Gasoleo",
+    "GasoleoPlus"
 ]
-let combustibleIndice = 0;
 
+var combustibleIndice = localStorage.getItem('combustible');
+if (!localStorage.getItem('combustible')) {
+  localStorage.setItem('combustible', 0);
+}
 document.getElementById("diesel").addEventListener("click", function () {
     combustibleIndice=2;
     console.log("diesel")
@@ -28,9 +33,7 @@ document.getElementById("gasolina98").addEventListener("click", function () {
 });
 
 //Para que el que aparezca seleccionado sea la 95
-document.getElementById("gasolina98").style.backgroundColor="#093E8B";
-document.getElementById("diesel").style.backgroundColor="#093E8B";
-document.getElementById("dieselplus").style.backgroundColor="#093E8B";
+cambioEstadoBotonesGasolina(localStorage.getItem('combustible'));
 
 function cambioEstadoBotonesGasolina(combustibleActivo) {
     const botones=["gasolina95","gasolina98","diesel","dieselplus"];
@@ -88,27 +91,46 @@ export function pushMarcadorInformacion(markers,infoGasolinera,map,iconGas,lista
        return html.text()
     })
     .then(content=>{
-        console.log(content)
-        let marcador = L.marker([parseFloat(infoGasolinera.Latitud.replace(",",".")),parseFloat(infoGasolinera["Longitud (WGS84)"].replace(",","."))],{icon: iconGas});
+        
+        console.log(infoGasolinera)
+        let marcador = L.marker([infoGasolinera.Latitud,infoGasolinera.Longitud],{icon: iconGas});
         var parser = new DOMParser();
         let doc = parser.parseFromString(content, 'text/html');
-        doc.getElementById("gasNombre").textContent = infoGasolinera["Rótulo"];
+        doc.getElementById("gasNombre").textContent = infoGasolinera["Rotulo"];
         doc.getElementById("precioGasolina").textContent = infoGasolinera[combustible[combustibleIndice]] + " €";
-        doc.getElementById("maps").href=ParsearUbcicacion(infoGasolinera["Dirección"],infoGasolinera["C.P."]);
+        doc.getElementById("maps").href=ParsearUbcicacion(infoGasolinera["Direccion"],infoGasolinera["C.P."]);
         doc.getElementById("tipoGasolinaTexto").textContent=combustible[combustibleIndice];
         doc.getElementById("horarioGasolinera").textContent=infoGasolinera.Horario;
+        
         let cont= doc.querySelector("html").innerHTML
         let gasolinera={gasNombre: infoGasolinera["Rótulo"],gasPrecio:infoGasolinera[combustible[combustibleIndice]],html: cont}
         marcador.bindPopup(cont,{minWidth: 500}).openPopup();
         listaGasolineras.push(gasolinera);
         
+        
         markers.push(marcador.addTo(map));
+        translateCards(getLanguage());
     })
     
 }
 
-export function  buscadorInformacionGasolinera(gasolineras){
-    return fetch("https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/")
+export function  buscadorInformacionGasolinera(gasolineras,markers,map,iconGas,listaGasolineras){
+
+    gasolineras.forEach(gasolinera => {
+        //console.log(gasolinera)
+        let coordGasolinera=gasolinera.split(",")
+          for (let i = 0; i < coordGasolinera.length; i++) {
+              var valorRedondeado= parseFloat(coordGasolinera[i]).toFixed(3);
+              coordGasolinera[i] = valorRedondeado;
+          }
+        //console.log(coordGasolinera)
+        let idgasolinera = coordGasolinera[1]+";"+coordGasolinera[0]
+        console.log(idgasolinera)
+        getGasolineraInfo(idgasolinera).then((gasInfo)=>{
+            pushMarcadorInformacion(markers,gasInfo,map,iconGas,listaGasolineras);
+        })
+    });
+    /*return fetch("https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/")
     .then(result=>result.json())
     .then(res =>{
         var coleccionInformacionGasolineras=[]
@@ -128,7 +150,7 @@ export function  buscadorInformacionGasolinera(gasolineras){
         return coleccionInformacionGasolineras;
         //console.log(res.ListaEESSPrecio
         //    .filter(gasolinera=> gasolinera.Latitud==latitud || gasolinera["Longitud (WGS84)"]==longitud));
-    })  
+    })  */
 }
 
 function ParsearUbcicacion(calle, codigo) {

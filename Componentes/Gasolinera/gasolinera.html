@@ -14,7 +14,7 @@
         </div>
         <div class="linea">
             <div class="precio">
-                <p class="tituloc">Horario:</p>
+                <p class="tituloc" id="titulocgas">Horario:</p>
                 <p class="coste" id="horarioGasolinera">--:--</p>
             </div>
         </div>
@@ -28,4 +28,11 @@
             </svg>
         </div>
     </div>
+    <script type="module">
+        import { translate,translateCards,translatePlaceholder, getLanguage } from '/scripts/translate.js';
+        console.log(localStorage.getItem('language'));
+        window.addEventListener('DOMContentLoaded', (event) =>{
+			translateCards(getLanguage());
+        })
+    </script>
 </html>
