@@ -9,7 +9,7 @@ import { sortGasolineras } from "./listas.js";
 import { clearListaGasolineras } from "./listas.js";
 import { getGasolineraInfo } from "./fireStore.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
-
+import { translate } from './translate.js'
 //Icono para gasolineras
 var iconGas = new L.icon({
   //iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-orange.png',
@@ -213,6 +213,7 @@ const auth = getAuth();
 					<li id="registro" style="display:none">Registrarse</li>
         </ul>
       `;
+      translate(localStorage.getItem('language'));
       document.getElementById("logout").addEventListener('click', () => {
         auth.signOut()
         .then(() => { 
@@ -237,6 +238,7 @@ const auth = getAuth();
           <li id="registro">Registrarse</li>
         </ul>
       `;
+      translate(localStorage.getItem('language'));
       document.getElementById("registro").addEventListener("click", function(){
         window.location.href="/Componentes/Sesion/formularioDeRegistro.html";
       });
