@@ -44,16 +44,25 @@ function registrar() {
 
 
 
+
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
-      const userProfile = {uid: user.uid, nombre: name, apellido: surname, email: email, password: password}
+      const userProfile = {uid: user.uid, nombre: name, apellido: surname, email: email, password: password, radio: "2000", idioma:localStorage.getItem('language'), combustible:"gasolina95"}
+      localStorage.setItem('radio', 2000)
       addUser(userProfile)
       alert('Usuario registrado!');
     })
     .catch((error) => {
-      var errorMessage = error.message;           
-      alert(errorMessage);
+      var errorMessage = error.message;       
+      console.log(errorMessage)    
+      if(errorMessage == "Firebase: Error (auth/email-already-in-use)."){
+        alert("Correo en uso")
+      } else if(errorMessage == "Firebase: Error (auth/invalid-email)."){
+        alert("Correo no válido")
+      } else {
+        alert(errorMessage);
+      }
   });
 }
 

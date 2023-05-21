@@ -1,0 +1,9 @@
+{
+    "login": "Iniciar sesión",
+    "registro": "Registrarse",
+    "tituloSesion": "Iniciar sesión",
+    "nombreLabelLog": "Email",
+    "contrasenaLabelLog": "Contraseña",
+    "pregNoCuentaLabel": "¿No tienes cuenta?",
+    "pregRegLabel": "Registrate"
+}

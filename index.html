@@ -48,10 +48,6 @@
 			
 			<!--Usuario desplegable-->
 			<div id="usuario-desplegable" style="display:none;" >
-				<ul>
-					<li id="login">Iniciar sesión</li>
-					<li id="registro">Registrarse</li>
-				  </ul>
 			</div>
 
 			<!-- Menu desplegable -->
@@ -150,7 +146,15 @@
 			<button id="idiomaen" class="bandera" style="margin-left: 7.5px;"><img title="en" width="40" src="/resources/en.png"></button>
 		</div>
 	</div>
-
+	<script type="module">
+        import { translate,translateCards,translatePlaceholder, getLanguage } from '/scripts/translate.js';
+        console.log(localStorage.getItem('language'));
+        window.addEventListener('DOMContentLoaded', (event) =>{
+            translate(getLanguage());
+			translatePlaceholder(getLanguage());
+			translateCards(getLanguage());
+        })
+    </script>
 </body>
 
 </html>

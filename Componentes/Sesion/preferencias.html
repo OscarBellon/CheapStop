@@ -16,6 +16,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 	<!-- CSS -->
 	<link rel="stylesheet" href="../../style.css">
+    <script type="module" src="../../scripts/preferenciasUsuarios.js"></script>
 </head>
 
 
@@ -36,42 +37,45 @@
     <div class="container" style="background-color: #FD8024; border-radius: 30px;">
         <div class="subcontainer d-flex flex-column m-3" style="background-color: white; border-radius: 30px; align-items: center;">
             <div class="my-5 d-flex justify-content-center"> 
-                <img src="3d-car.png" height="206" width="227">
+                <img src="../../resources/3d-car.png" height="206" width="227">
                 
             </div>
-            <div class="col-md-5 my-3"> 
+            <div class="col-md-5 my-1"> 
+                <label id="labelCombustible">Combustible:</label>
                 <select class="form-select" id="carburanteSelLabel" style="border: 2px var(--bs-warning-border-subtle) solid;" aria-label="Default select example">
-                    <option selected>Tipo de Carburante</option>
-                    <option value="Gasolina95">Gasolina 95</option>
-                    <option value="Gasolina98">Gasolina 98</option>
+                    <option value="0">Gasolina 95</option>
+                    <option value="1">Gasolina 98</option>
                     <option value="2">Diesel</option>
                     <option value="3">Diesel Plus</option>
                 </select>
             </div>
-            <div class="col-md-5 my-3"> 
+            <div class="col-md-5 my-1"> 
+                <label id="labelRadio">Radio:</label>
                 <select class="form-select" id="radioSelLabel" aria-label="Default select example" style="border: 2px var(--bs-warning-border-subtle) solid;">
-                    <option selected>Radio</option>
-                    <option value="1">1000</option>
-                    <option value="2">2000</option>
-                    <option value="3">3000</option>
-                    <option value="3">4000</option>
-                    <option value="3">5000</option>
+                    <option value="1000">1 Km</option>
+                    <option value="2000">2 Km</option>
+                    <option value="3000">3 Km</option>
+                    <option value="4000">4 Km</option>
+                    <option value="5000">5 Km</option>
                 </select>
             </div>
-            <div class="col-md-5 my-3"> 
+            <div class="col-md-5 my-1 mb-5"> 
+                <label id="labelIdioma">Idioma:</label>
                 <select class="form-select" id="idiomaSelLabel" aria-label="Default select example" style="border: 2px var(--bs-warning-border-subtle) solid;">
-                    <option selected>Idioma</option>
-                    <option value="1">Español</option>
-                    <option value="2">Inglés</option>
-                    <option value="3">Esperanto</option>
+                    <option value="es">Español</option>
+                    <option value="en">Inglés</option>
+                    <option value="eo">Esperanto</option>
                 </select>
             </div>
-            <div class="my-5 d-flex justify-content-center"> 
-                    <button type="submit" class="btn btn-block btn-warning" style="background-color: #FD8024; color: white;"><strong id="volverLabel">Volver</strong></button>
-            </div>
-            <div class="my-5"></div>
+            
         </div>
-        
+        <script type="module">
+            import { translatePreferences, getLanguage } from '/scripts/translate.js';
+            console.log(localStorage.getItem('language'));
+            window.addEventListener('DOMContentLoaded', (event) =>{
+                translatePreferences(getLanguage());
+            })
+        </script>
         
         
     </div>
