@@ -285,24 +285,18 @@ export function updatePreferences(docs){
     let ids = Object.keys(docs);
     for(let i=0; i<ids.length;i++){
         let id = ids[i];
-        let elements = document.querySelectorAll(`[data-translate=${id}]`);
-        elements.forEach(element => {
+        let element = document.getElementById(id);
+        if(element) {
             if(element.nodeName === "INPUT") {
                 if (element.placeholder !== undefined && element.placeholder !== '') {
                     element.placeholder = docs[id];
                 } else {
                     element.value = docs[id];
                 }
-            } else if(element.nodeName === "SELECT") {
-                for (let option of element.options) {
-                    if (docs[option.getAttribute('data-translate')]) {
-                        option.textContent = docs[option.getAttribute('data-translate')];
-                    }
-                }
             } else {
                 element.textContent = docs[id];
             }
-        })
+        }
     }
     console.log("Ha terminado");
 }
