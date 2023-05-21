@@ -1,13 +1,5 @@
 {
-    "tipo-carburante": "Tipo de Combustible",
-    "gasolina95": "Gasolina 95",
-    "gasolina98": "Gasolina 98",
-    "diesel": "Diésel",
-    "diesel-plus": "Diésel Plus",
-    "radio": "Radio",
-    "idioma": "Idioma",
-    "espanol": "Español",
-    "ingles": "Inglés",
-    "esperanto": "Esperanto",
-    "volver": "Volver"
+    "labelCombustible": "Combustible: ",
+    "labelRadio": "Radio: ",
+    "labelIdioma": "Idioma: "
 }

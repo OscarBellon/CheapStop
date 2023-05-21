@@ -2,6 +2,7 @@
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
 import { getFirestore, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js";
+import { getLanguage, setLanguage, updatePreferences  } from "./translate.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBLVWteUKxzpjeVIp3XGV940UEN1o_WRMA",
@@ -84,7 +85,7 @@ selectLanguage.addEventListener('change', (event) => {
     idioma: selected
   })
   .then(async () => {
-    localStorage.setItem('language', selected)
+    localStorage.setItem('language', selected);
     console.log('Opción guardada en la base de datos');
     })
     .catch((error) => {
