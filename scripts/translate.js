@@ -1,7 +1,7 @@
 var language = "es";
 
 export function getLanguage(){
-    language;
+    return language;
 }
 
 export function setLAnguage(idioma){
@@ -77,7 +77,7 @@ export function translateCards(idioma){
 
         case "eo":
             console.log("Esperanto")
-            fetch("/translations/eo_card.json").then(result => result.json()).then(res => {updateNodes(res)});
+            fetch("/translations/eo_cards.json").then(result => result.json()).then(res => {updateNodes(res)});
             break
 
     }
@@ -180,8 +180,10 @@ export function updateNodes(docs){
     let ids = Object.keys(docs);
     for(let i=0; i<ids.length;i++){
         let id = ids[i];
-        console.log(id)
-        document.querySelectorAll("id").forEach(elemento => {
+        //console.log(id)
+        console.log(document.querySelectorAll("#"+id))
+        document.querySelectorAll("#"+id).forEach(elemento => {
+            console.log("element found")
             elemento.textContent=docs[id];
         })
     }

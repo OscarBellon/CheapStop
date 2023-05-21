@@ -7,11 +7,13 @@ export function sortGasolineras(markers){
 }
 
 export function listarGasolineras(listaGasolineras){
+    document.getElementById("gas-list").innerHTML="";
     listaGasolineras.forEach(gasolinera => {
         let node = document.createElement("div");
         node.innerHTML=gasolinera.html;
         document.getElementById("gas-list").appendChild(node) 
     });
+    console.log(getLanguage())
     translateCards(getLanguage())
 }
 

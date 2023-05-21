@@ -92,10 +92,6 @@ document.getElementById("gasolineraLista").addEventListener("click",function () 
         console.log("Longitud: " + ubicacionCoords[0]);
         listaGasolineras = []
         buscadorInformacionGasolinera(result,markers,map,iconGas,listaGasolineras)
-        document.getElementById("diesel").addEventListener("click",()=>{
-          combustibleIndice=2;
-          pushMarcadorInformacion(markers,gasInfo,map,iconGas,listaGasolineras);
-        })
         /*buscadorInformacionGasolinera(result).then((info) => {
           console.log(info);
           listaGasolineras = [];

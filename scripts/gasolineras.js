@@ -1,4 +1,5 @@
 import { getGasolineraInfo } from "./fireStore.js";
+import { getLanguage, updateNodes, translateCards} from "./translate.js";
 
 let combustible = [
     "Gasolina95E5",
@@ -105,7 +106,9 @@ export function pushMarcadorInformacion(markers,infoGasolinera,map,iconGas,lista
         marcador.bindPopup(cont,{minWidth: 500}).openPopup();
         listaGasolineras.push(gasolinera);
         
-        markers.push(marcador.addTo(map));
+        markers.push(marcador.addTo(map).on('click',()=>{
+            translateCards(getLanguage())
+        }));
     })
     
 }
@@ -124,6 +127,31 @@ export function  buscadorInformacionGasolinera(gasolineras,markers,map,iconGas,l
         console.log(idgasolinera)
         getGasolineraInfo(idgasolinera).then((gasInfo)=>{
             pushMarcadorInformacion(markers,gasInfo,map,iconGas,listaGasolineras);
+        })
+
+        document.getElementById("diesel").addEventListener("click",function(){
+            combustibleIndice = 2;
+            getGasolineraInfo(idgasolinera).then((gasInfo)=>{
+                pushMarcadorInformacion(markers,gasInfo,map,iconGas,listaGasolineras);
+            })     
+        })
+        document.getElementById("gasolina95").addEventListener("click",function(){
+            combustibleIndice = 0;
+            getGasolineraInfo(idgasolinera).then((gasInfo)=>{
+                pushMarcadorInformacion(markers,gasInfo,map,iconGas,listaGasolineras);
+            })     
+        })
+        document.getElementById("gasolina98").addEventListener("click",function(){
+            combustibleIndice = 1;
+            getGasolineraInfo(idgasolinera).then((gasInfo)=>{
+                pushMarcadorInformacion(markers,gasInfo,map,iconGas,listaGasolineras);
+            })     
+        })
+        document.getElementById("dieselplus").addEventListener("click",function(){
+            combustibleIndice = 3;
+            getGasolineraInfo(idgasolinera).then((gasInfo)=>{
+                pushMarcadorInformacion(markers,gasInfo,map,iconGas,listaGasolineras);
+            })     
         })
     });
     /*return fetch("https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/")
