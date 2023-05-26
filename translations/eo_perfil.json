@@ -3,5 +3,17 @@
     "emailLabel": "Retpoŝto:",
     "gestionarLabel": "Administri konton",
     "camContraseñaLabel": "Ŝanĝi pasvorton",
-    "eliCuentaLabel": "Forigi konton"
+    "eliCuentaLabel": "Forigi konton",
+    "cambiarContraseñaLabel": "Ŝanĝi pasvorton",
+    "requisitosCambiarContraseña": "Devus enhavi almenaŭ 8 ciferojn uzante literojn, ciferojn kaj almenaŭ 1 simbolon",
+    "contraseñaActualLabel": "Nuna pasvorto",
+    "nuevaContraseñaLabel": "Nova pasvorto",
+    "confirmarContraseñaLabel": "Konfirmi pasvorton",
+    "guardar": "Konservi pasvorton",
+    "eliminarCuentaLabel": "Forigi konton",
+    "requisitosEliminarCuenta": "Forigi la konton forigos vian historion kaj ĉiujn viajn serĉpreferencojn",
+    "avisoEliminarCuenta": "Ĉu vi certas, ke vi volas forigi la konton?",
+    "eliminarCuenta": "Forigi konton",
+    "cerrarVentana": "Rezigni",
+    "cerrarVentanaCuenta": "Rezigni"
 }

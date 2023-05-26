@@ -13,6 +13,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="../../style.css">
     <script type="module" src="../../scripts/datosUsuario.js"></script>
     <!-- Estilos personalizados para centrar el formulario -->
@@ -57,17 +59,81 @@
         <div class="d-flex justify-content-center">
             <div id="lineaEpica"></div>
         </div>
-        <button type="submit" style="background-color: #F6A56A;" class="btn btn-warning btn-block my-4">
+        <button type="submit" style="background-color: #F6A56A;" class="btn btn-warning btn-block my-4" id="botonCambiarContraseña" data-bs-toggle="modal" data-bs-target="#ventanaEmergenteContraseña">
             <svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" fill="currentColor" class="bi bi-person-fill-lock" viewBox="0 0 16 16">
                 <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm-9 8c0 1 1 1 1 1h5v-1a1.9 1.9 0 0 1 .01-.2 4.49 4.49 0 0 1 1.534-3.693C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Zm7 0a1 1 0 0 1 1-1v-1a2 2 0 1 1 4 0v1a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-2Zm3-3a1 1 0 0 0-1 1v1h2v-1a1 1 0 0 0-1-1Z"/>
               </svg>
-            <strong id="camContraseñaLabel">Cambiar contraseña</strong></button>
-        <button type="submit" style="background-color: #FE5247" class="btn btn-warning btn-block my-4">
+            <strong id="camContraseñaLabel">Cambiar contraseña</strong>
+        </button>
+                
+        <!--Ventana emergente Contraseña-->
+        <div class="modal fade" id="ventanaEmergenteContraseña" tabindex="-1" aria-labelledby="cambiarContraseñaLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" fill="currentColor" class="bi bi-person-fill-lock mx-auto" viewBox="0 0 16 16">
+                        <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm-9 8c0 1 1 1 1 1h5v-1a1.9 1.9 0 0 1 .01-.2 4.49 4.49 0 0 1 1.534-3.693C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Zm7 0a1 1 0 0 1 1-1v-1a2 2 0 1 1 4 0v1a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-2Zm3-3a1 1 0 0 0-1 1v1h2v-1a1 1 0 0 0-1-1Z"/>
+                    </svg>
+                    <h5 class="modal-title mx-auto" id="cambiarContraseñaLabel">Cambiar contraseña</h5>
+                </div>
+                <div class="modal-body text-center">
+                    <p id="requisitosCambiarContraseña">Debe contener al menos 8 digitos usando letras, números y minimo 1 simbolo</p>
+                    <form>
+                        <div class="form-group text-start">
+                            <label for="contraseñaActual" id="contraseñaActualLabel">Contraseña actual</label>
+                            <input type="password" id="contraseñaActual" class="form-control">
+                        </div>
+                        <div class="form-group text-start">
+                            <label for="nuevaContraseña" id="nuevaContraseñaLabel">Nueva contraseña</label>
+                            <input type="password" id="nuevaContraseña" class="form-control">
+                        </div>
+                        <div class="form-group text-start">
+                            <label for="confirmarContraseña" id="confirmarContraseñaLabel">Confirmar contraseña</label>
+                            <input type="password" id="confirmarContraseña" class="form-control">
+                        </div>
+                        <div class="form-group d-flex justify-content-center">
+                            <button type="submit" class="btn btn-primary" id="guardar" style="background-color: #0B4EAE">Guardar</button>
+                            <button type="button" data-bs-dismiss="modal" id="cerrarVentana" class="btn btn-secondary" style="background-color: #FF0000">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <button type="submit" style="background-color: #FE5247" class="btn btn-warning btn-block my-4" data-bs-toggle="modal" data-bs-target="#ventanaEmergenteEliminar">
             <svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" fill="currentColor" class="bi bi-person-fill-x" viewBox="0 0 16 16">
                 <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm-9 8c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Z"/>
                 <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm-.646-4.854.646.647.646-.647a.5.5 0 0 1 .708.708l-.647.646.647.646a.5.5 0 0 1-.708.708l-.646-.647-.646.647a.5.5 0 0 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 .708-.708Z"/>
               </svg>
-            <strong id="eliCuentaLabel">Eliminar cuenta</strong></button>
+            <strong id="eliCuentaLabel">Eliminar cuenta</strong>
+        </button>
+
+        <!--Ventana emergente eliminar cuenta-->
+        <div class="modal fade" id="ventanaEmergenteEliminar" tabindex="-1" aria-labelledby="ventanaEmergenteEliminar" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" fill="currentColor" class="bi bi-person-fill-x" viewBox="0 0 16 16">
+                            <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm-9 8c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Z"/>
+                            <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm-.646-4.854.646.647.646-.647a.5.5 0 0 1 .708.708l-.647.646.647.646a.5.5 0 0 1-.708.708l-.646-.647-.646.647a.5.5 0 0 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 .708-.708Z"/>
+                          </svg>
+                        <h5 class="modal-title mx-auto" id="eliminarCuentaLabel">Eliminar cuenta</h5>
+                    </div>
+                    <div class="modal-body text-center">
+                        <p id="requisitosEliminarCuenta">Al eliminar la cuenta se borrará tu historial y todas tus preferencias de busqueda</p>
+                        <strong id="avisoEliminarCuenta">¿Estas segundo que quieres eliminar la cuenta?</strong>
+                    </div>
+                    <div class="form-group d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary" id="eliminarCuenta" style="background-color: #FF0000">Elimar cuenta</button>
+                        <button type="button" data-bs-dismiss="modal" id="cerrarVentanaCuenta" class="btn btn-secondary" style="background-color: #0B4EAE">Cancelar</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+            
+
     </div>
     <script type="module">
         import { translateProfile, getLanguage } from '/scripts/translate.js';
@@ -76,4 +142,7 @@
             translateProfile(getLanguage());
         })
     </script>
+    <script type="module" src="/scripts/perfil.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
+</html>
