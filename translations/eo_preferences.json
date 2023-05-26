@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
     "tipo-carburante": "Speco de Kombustilo",
     "gasolina95": "Gasolino 95",
@@ -10,4 +11,10 @@
     "ingles": "Angla",
     "esperanto": "Esperanto",
     "volver": "Reen"
+=======
+{
+    "labelCombustible": "Brulaĵo: ",
+    "labelRadio": "Radio: ",
+    "labelIdioma": "Lingvo: "
+>>>>>>> main
 }

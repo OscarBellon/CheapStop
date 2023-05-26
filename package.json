@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 {
   "dependencies": {
     "firebase": "^9.21.0"
   }
 }
+=======
+{
+  "dependencies": {
+    "firebase": "^9.21.0"
+  }
+}
+>>>>>>> main

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
     "tipo-carburante": "Fuel Type",
     "gasolina95": "Gasoline 95",
@@ -11,3 +12,10 @@
     "esperanto": "Esperanto",
     "volver": "Back"
 }
+=======
+{
+    "labelCombustible": "Fuel Type: ",
+    "labelRadio": "Radio: ",
+    "labelIdioma": "Language: "
+}
+>>>>>>> main
