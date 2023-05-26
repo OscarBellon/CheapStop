@@ -3,5 +3,18 @@
     "emailLabel": "Email:",
     "gestionarLabel": "Manage account",
     "camContraseñaLabel": "Change password",
-    "eliCuentaLabel": "Delete account"
+    "eliCuentaLabel": "Delete account",
+    "cambiarContraseñaLabel":"Change password",
+    "requisitosCambiarContraseña":"Must contain at least 8 digits using letters, numbers and at least 1 symbol",
+    "contraseñaActualLabel":"Current password",
+    "nuevaContraseñaLabel": "New password",
+    "confirmarContraseñaLabel": "Confirm password",
+    "guardar": "Save password",
+    "eliminarCuentaLabel":"Delete account",
+    "requisitosEliminarCuenta": "Deleting the account will delete your history and all your search preferences",
+    "avisoEliminarCuenta": "Are you second that you want to delete the account?",
+    "eliminarCuenta": "Delete account",
+    "cerrarVentana": "Cancel",
+    "cerrarVentanaCuenta": "Cancel"
+
 }
