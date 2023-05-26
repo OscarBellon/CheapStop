@@ -187,16 +187,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 document.getElementById("rangevalue").innerHTML = localStorage.getItem('radio')/1000 + "Km";
 document.getElementById('customRange3').value = parseFloat(localStorage.getItem('radio')/1000)
-document.getElementById("icono-usuario").addEventListener("click", function () {
-  //document.getElementById("botones-container").style.display = "none";
-  //document.getElementById("slider-container").style.display = "none";
-  var dropdownMenu = document.getElementById("usuario-desplegable");
-  if (dropdownMenu.style.display === "none") {
-    dropdownMenu.style.display = "block";
-  } else {
-    dropdownMenu.style.display = "none";
-  }
-});
+
 
 const auth = getAuth();
   onAuthStateChanged(auth, (user) => {
@@ -224,13 +215,28 @@ const auth = getAuth();
         .catch(error => {console.error(error);})
       })
       document.getElementById("preferencias").addEventListener("click", function(){
-        window.location.href="/Componentes/Sesion/preferencias.html";
+        window.location.href="/Componentes/UsuarioRegistrado/preferencias.html";
       });
-    
+      document.getElementById("icono-usuario").addEventListener("click", function () {
+        //document.getElementById("botones-container").style.display = "none";
+        //document.getElementById("slider-container").style.display = "none";
+        window.location.href="/Componentes/UsuarioRegistrado/interfaz.html";
+      });
+
       document.getElementById("perfil").addEventListener("click", function(){
-        window.location.href="/Componentes/Sesion/perfil.html";
+        window.location.href="/Componentes/UsuarioRegistrado/perfil.html";
       });
     } else {
+      document.getElementById("icono-usuario").addEventListener("click", function () {
+        //document.getElementById("botones-container").style.display = "none";
+        //document.getElementById("slider-container").style.display = "none";
+        var dropdownMenu = document.getElementById("usuario-desplegable");
+        if (dropdownMenu.style.display === "none") {
+          dropdownMenu.style.display = "block";
+        } else {
+          dropdownMenu.style.display = "none";
+        }
+      });
       // Usuario no logeado
       usuarioDesplegable.innerHTML = `
         <ul>
@@ -238,6 +244,7 @@ const auth = getAuth();
           <li id="registro">Registrarse</li>
         </ul>
       `;
+      
       translate(localStorage.getItem('language'));
       document.getElementById("registro").addEventListener("click", function(){
         window.location.href="/Componentes/Sesion/formularioDeRegistro.html";
@@ -247,6 +254,4 @@ const auth = getAuth();
         window.location.href="/Componentes/Sesion/formularioDeLogin.html";
       });
     }
-  
-    usuarioDesplegable.style.display = 'block';
   });
