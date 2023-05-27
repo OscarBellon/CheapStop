@@ -1,7 +1,7 @@
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
+import { getAuth, deleteUser, EmailAuthProvider, signInWithEmailAndPassword, updatePassword, reauthenticateWithCredential} from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js";
-import { EmailAuthProvider } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
+
 const firebaseConfig = {
   apiKey: "AIzaSyBLVWteUKxzpjeVIp3XGV940UEN1o_WRMA",
   authDomain: "cheapstop-ba4b1.firebaseapp.com",
@@ -17,50 +17,61 @@ const db = getFirestore(app);
 const auth = getAuth();
 
 async function cambiarContrasena() {
-    const contrasenaActualInput = document.getElementById('contrasenaActual');
-    const nuevaContrasenaInput = document.getElementById('nuevaContrasena');
-    const confirmarContrasenaInput = document.getElementById('confirmarContrasena');
-
+    const contrasenaActualInput = document.getElementById('contraseñaActual');
+    const nuevaContrasenaInput = document.getElementById('nuevaContraseña');
+    const confirmarContrasenaInput = document.getElementById('confirmarContraseña');
+    const user = auth.currentUser;
+    console.log(nuevaContrasenaInput.value);
     // Comprobación de las contraseñas
     if (nuevaContrasenaInput.value !== confirmarContrasenaInput.value) {
         alert("Las contraseñas no coinciden");
         return;
     }
-
-    // Reautenticación del usuario
-    const user = auth.currentUser;
-    const credential = EmailAuthProvider.credential(
-        user.email, 
-        contrasenaActualInput.value
-    );
+    const credential = EmailAuthProvider.credential(user.email, contrasenaActualInput.value);
+    console.log(credential);
 
     try {
-        await user.reauthenticateWithCredential(credential);
+        // Reautenticar al usuario
+        await signInWithEmailAndPassword(auth, user.email, contrasenaActualInput.value);
+        await updatePassword(user, nuevaContrasenaInput.value);
+        alert('Contraseña actualizada con éxito');
     } catch (error) {
-        console.log(error);
-        alert("La contraseña actual es incorrecta");
-        return;
+        alert('Error al iniciar: ' + error.message);
     }
-
-    // Cambio de la contraseña
+    /*
     try {
-        await user.updatePassword(nuevaContrasenaInput.value);
-        alert("Contraseña cambiada con éxito");
+        reauthenticateWithCredential(user, credential).then(() => {
+            // User re-authenticated.
+            try {
+            updatePassword(user, nuevaContrasenaInput);
+            alert('Contraseña actualizada con éxito');
+            } catch (error) {
+                alert('No actualiza:'  + error.message);
+            }
+          }).catch((error) => {
+            // An error ocurred
+            // ...
+            alert('No esta reautenticado:'  + error.message);
+          });
     } catch (error) {
-        alert("Error al cambiar la contraseña");
-    }
+        alert('Error al cambiar la contraseña: ' + error.message);
+    }*/
+    window.location.href="../../../index.html";
 }
 
+async function papa(){
+    console.log("david");
+}
 async function eliminarCuenta() {
+    const auth = getAuth();
     const user = auth.currentUser;
 
-    try {
-        await user.delete();
+    deleteUser(user).then(() => {
         alert("La cuenta ha sido eliminada con éxito");
-        window.location.href("../../../index.html");
-    } catch (error) {
-        alert("Error al eliminar la cuenta");
-    }
+        window.location.replace("../../../index.html");
+    }).catch((error) => {
+        alert("Error al eliminar la cuenta:" + error);
+    });
 }
 document.getElementById('eliminarCuenta').addEventListener('click',eliminarCuenta);
-document.getElementById('guardar').addEventListener('click', cambiarContrasena);
+document.getElementById('guardar').addEventListener('click',cambiarContrasena);

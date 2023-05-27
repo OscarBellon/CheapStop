@@ -69,31 +69,31 @@
         <!--Ventana emergente Contraseña-->
         <div class="modal fade" id="ventanaEmergenteContraseña" tabindex="-1" aria-labelledby="cambiarContraseñaLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                <div class="modal-header text-center">
+              <div class="modal-content border border-warning">
+                <div class="modal-header text-center flex-column">
                     <svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" fill="currentColor" class="bi bi-person-fill-lock mx-auto" viewBox="0 0 16 16">
                         <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm-9 8c0 1 1 1 1 1h5v-1a1.9 1.9 0 0 1 .01-.2 4.49 4.49 0 0 1 1.534-3.693C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Zm7 0a1 1 0 0 1 1-1v-1a2 2 0 1 1 4 0v1a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-2Zm3-3a1 1 0 0 0-1 1v1h2v-1a1 1 0 0 0-1-1Z"/>
                     </svg>
                     <h5 class="modal-title mx-auto" id="cambiarContraseñaLabel">Cambiar contraseña</h5>
                 </div>
                 <div class="modal-body text-center">
-                    <p id="requisitosCambiarContraseña">Debe contener al menos 8 digitos usando letras, números y minimo 1 simbolo</p>
-                    <form>
+                    <p id="requisitosCambiarContraseña" class="px-5">Debe contener al menos 8 digitos usando letras, números y minimo 1 simbolo</p>
+                    <form class="mx-3" onsubmit="return false">
                         <div class="form-group text-start">
-                            <label for="contraseñaActual" id="contraseñaActualLabel">Contraseña actual</label>
+                            <label for="contraseñaActual" id="contraseñaActualLabel" class="mx-3">Contraseña actual:</label>
                             <input type="password" id="contraseñaActual" class="form-control">
                         </div>
                         <div class="form-group text-start">
-                            <label for="nuevaContraseña" id="nuevaContraseñaLabel">Nueva contraseña</label>
+                            <label for="nuevaContraseña" id="nuevaContraseñaLabel" class="mx-3">Nueva contraseña:</label>
                             <input type="password" id="nuevaContraseña" class="form-control">
                         </div>
                         <div class="form-group text-start">
-                            <label for="confirmarContraseña" id="confirmarContraseñaLabel">Confirmar contraseña</label>
+                            <label for="confirmarContraseña" id="confirmarContraseñaLabel" class="mx-3">Confirmar contraseña:</label>
                             <input type="password" id="confirmarContraseña" class="form-control">
                         </div>
-                        <div class="form-group d-flex justify-content-center">
-                            <button type="submit" class="btn btn-primary" id="guardar" style="background-color: #0B4EAE">Guardar</button>
-                            <button type="button" data-bs-dismiss="modal" id="cerrarVentana" class="btn btn-secondary" style="background-color: #FF0000">Cancelar</button>
+                        <div class="form-group d-flex justify-content-center gap-3">
+                            <button type="submit" class="btn btn-primary rounded-pill" id="guardar" style="background-color: #0B4EAE">Guardar</button>
+                            <button type="button" data-bs-dismiss="modal" id="cerrarVentana" class="btn btn-secondary rounded-pill" style="background-color: #FF0000">Cancelar</button>
                         </div>
                     </form>
                 </div>
@@ -112,21 +112,21 @@
         <!--Ventana emergente eliminar cuenta-->
         <div class="modal fade" id="ventanaEmergenteEliminar" tabindex="-1" aria-labelledby="ventanaEmergenteEliminar" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header text-center">
+                <div class="modal-content border border-danger">
+                    <div class="modal-header text-center flex-column">
                         <svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" fill="currentColor" class="bi bi-person-fill-x" viewBox="0 0 16 16">
                             <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm-9 8c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Z"/>
                             <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm-.646-4.854.646.647.646-.647a.5.5 0 0 1 .708.708l-.647.646.647.646a.5.5 0 0 1-.708.708l-.646-.647-.646.647a.5.5 0 0 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 .708-.708Z"/>
                           </svg>
                         <h5 class="modal-title mx-auto" id="eliminarCuentaLabel">Eliminar cuenta</h5>
                     </div>
-                    <div class="modal-body text-center">
+                    <div class="modal-body text-center px-5">
                         <p id="requisitosEliminarCuenta">Al eliminar la cuenta se borrará tu historial y todas tus preferencias de busqueda</p>
-                        <strong id="avisoEliminarCuenta">¿Estas segundo que quieres eliminar la cuenta?</strong>
+                        <strong id="avisoEliminarCuenta" style="font-size: 20px;">¿Estas segundo que quieres eliminar la cuenta?</strong>
                     </div>
-                    <div class="form-group d-flex justify-content-center">
-                        <button type="submit" class="btn btn-primary" id="eliminarCuenta" style="background-color: #FF0000">Elimar cuenta</button>
-                        <button type="button" data-bs-dismiss="modal" id="cerrarVentanaCuenta" class="btn btn-secondary" style="background-color: #0B4EAE">Cancelar</button>
+                    <div class="form-group d-flex justify-content-center gap-3">
+                        <button type="submit" class="btn btn-primary rounded-pill" id="eliminarCuenta" style="background-color: #FF0000">Eliminar cuenta</button>
+                        <button type="button" data-bs-dismiss="modal" id="cerrarVentanaCuenta" class="btn btn-secondary rounded-pill" style="background-color: #0B4EAE">Cancelar</button>
                     </div>
 
                 </div>
