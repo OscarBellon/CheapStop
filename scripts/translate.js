@@ -137,6 +137,29 @@ export function translateRegister(idioma){
 
 }
 
+export function translateInterface(idioma){
+
+    console.log("Traduciendo...")
+
+    switch(idioma){
+
+        case "es":
+            fetch("/translations/es_interface.json").then(result => result.json()).then(res => {updateInterface(res)});
+            break
+
+        case "en":
+            fetch("/translations/en_interface.json").then(result => result.json()).then(res => {updateInterface(res)});
+            break
+
+        case "eo":
+            console.log("Esperanto")
+            fetch("/translations/eo_interface.json").then(result => result.json()).then(res => {updateInterface(res)});
+            break
+
+    }
+
+}
+
 export function translateProfile(idioma){
 
     console.log("Traduciendo...")
@@ -262,6 +285,27 @@ export function updateRegister(docs){
 }
 
 export function updateProfile(docs){
+    console.log("Ha comenzado la traduccion del Perfil");
+    let ids = Object.keys(docs);
+    for(let i=0; i<ids.length;i++){
+        let id = ids[i];
+        let element = document.getElementById(id);
+        if(element) {
+            if(element.nodeName === "INPUT") {
+                if (element.placeholder !== undefined && element.placeholder !== '') {
+                    element.placeholder = docs[id];
+                } else {
+                    element.value = docs[id];
+                }
+            } else {
+                element.textContent = docs[id];
+            }
+        }
+    }
+    console.log("Ha terminado");
+}
+
+export function updateInterface(docs){
     console.log("Ha comenzado la traduccion del Perfil");
     let ids = Object.keys(docs);
     for(let i=0; i<ids.length;i++){

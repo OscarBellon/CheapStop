@@ -24,7 +24,7 @@ document.getElementById("icono-volver").addEventListener("click", function(){
     window.location.href="../UsuarioRegistrado/preferencias.html";
   });
   const auth = getAuth();
-  onAuthStateChanged(auth, (user) => {
+  onAuthStateChanged(auth, async (user) => {
     const usuarioDesplegable = document.getElementById('usuario-desplegable');
 
     if (user) {
@@ -38,6 +38,11 @@ document.getElementById("icono-volver").addEventListener("click", function(){
         })
         .catch(error => {console.error(error);})
       })
+      const ref = doc(db, 'usuarios', user?.uid)
+      const currentUser = await getDoc(ref, user);
+      nombrePersona.innerText = currentUser.data().nombre;
+      
+      
     } else {
         // Usuario no logeado
     }

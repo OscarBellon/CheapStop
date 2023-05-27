@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario de registro</title>
+    <title>Interfaz registrado</title>
     <!--Imagen corporativa en la pestaña-->
     <link rel="icon" type="image/png" href="logo.png" size="32x32">
     <!-- Enlace a los archivos CSS de Bootstrap -->
@@ -31,23 +31,23 @@
         <h2 id="nombrePersona"></h2>
         <div class="cuadradosRedondos" id="botonPerfil">
             <img src="../../resources/user_black.png" height="40" width="40">
-            <h3>Perfil</h3>
+            <h3 id="profileLabel">Perfil</h3>
         </div>
         <div class="cuadradosRedondos" id="botonMarcadores">
             <img src="../../resources/bookmarker.png" height="40" width="40">
-            <h3>Marcadores</h3>
+            <h3 id="markerLabel">Marcadores</h3>
         </div>
         <div class="cuadradosRedondos" id="botonHistorial">
             <img src="../../resources/historial.png" height="40" width="40">
-            <h3>Historial</h3>
+            <h3 id="historyLabel">Historial</h3>
         </div>
         <div class="cuadradosRedondos" id="botonComentarios">
             <img src="../../resources/bocadillo.png" height="40" width="40">
-            <h3>Comentarios</h3>
+            <h3 id="commentsLabel">Comentarios</h3>
         </div>
         <div class="cuadradosRedondos" id="botonPreferencias">
             <img src="../../resources/preferences.png" height="40" width="40">
-            <h3>Preferencias</h3>
+            <h3 id="preferenceLabel">Preferencias</h3>
         </div>
         
     </div>
@@ -55,4 +55,10 @@
         <img src="../../resources/red-flag.png" height="40" width="40">
         <img id="logout" src="../../resources/logout.png" height="40" width="40">
     </div>
+    <script type="module">
+        import { translateInterface, getLanguage } from '/scripts/translate.js';
+        window.addEventListener('DOMContentLoaded', (event) =>{
+            translateInterface(getLanguage());
+        })
+    </script>
 </body>
